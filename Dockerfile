@@ -8,6 +8,7 @@ RUN sudo -i -u steam mkdir -p "~/.local/share/Arma 3"
 RUN sudo -i -u steam mkdir -p "~/.local/share/Arma 3 - Other Profiles"
 
 # Override the default steamer.txt file
+#new
 ADD ./steamer.txt /home/steam/steamer.txt
 RUN chmod 755 /home/steam/steamer.txt
 
