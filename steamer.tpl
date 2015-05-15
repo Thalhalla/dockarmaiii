@@ -4,7 +4,7 @@
 @NoPromptForPassword 1
 //login <username> <password>
 //for servers which don't need a login
-login anonymous 
+login REPLACEME_USERNAME REPLACEME_PASSWORD
 force_install_dir ./arma3/
 app_update 233780 validate
 quit
