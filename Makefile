@@ -11,15 +11,15 @@ build: builddocker beep
 run: builddocker rundocker beep
 
 rundocker:
-	@docker run --name=dockarmaiii \
+	@docker run --name=steamer \
 	--cidfile="cid" \
 	-v /tmp:/tmp \
 	-v /var/run/docker.sock:/run/docker.sock \
 	-v $(shell which docker):/bin/docker \
-	-t thalhalla/dockarmaiii
+	-t joshuacox/steamer
 
 builddocker:
-	/usr/bin/time -v docker build -t thalhalla/dockarmaiii .
+	/usr/bin/time -v docker build -t joshuacox/steamer .
 
 beep:
 	@echo "beep"

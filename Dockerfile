@@ -1,7 +1,7 @@
 FROM debian:jessie
 MAINTAINER Josh Cox <josh 'at' webhosting coop>
 
-ENV DOCKARMAIII_UPDATED 20150513
+ENV STEAMER_UPDATED 20150513
 RUN apt-get -y update
 RUN apt-get install -y lib32gcc1
 RUN rm -rf /var/lib/apt/lists/*
