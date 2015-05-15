@@ -35,15 +35,9 @@ rm-image:
 	@docker rm `cat cid`
 	@rm cid
 
-cleanfiles:
-	rm name
-	rm repo
-	rm proxy
-	rm proxyport
-
 rm: kill rm-image
 
-clean: cleanfiles rm
+clean: rm-name rm
 
 enter:
 	docker exec -i -t `cat cid` /bin/bash

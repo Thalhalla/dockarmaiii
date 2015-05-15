@@ -2,7 +2,7 @@
 Docker that contains steam, caution steam can cause severe burns!
 
 ## Usage
-replace steamer.txt with a custom script of your own then `make run`
+replace steamer.txt with a custom script of your own, and replace run.sh with the server command then `make run`
 
 view the dev docs here:
 https://developer.valvesoftware.com/wiki/SteamCMD#Creating_a_script
