@@ -20,8 +20,9 @@ RUN rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m -s /bin/bash steam
 RUN usermod -a -G video,audio steam
+RUN mkdir -p /home/steam/steamcmd
+RUN chown -R steam. /home/steam
 USER steam
-RUN mkdir /home/steam/steamcmd
 WORKDIR /home/steam/steamcmd
 RUN wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
 RUN tar zxvf steamcmd_linux.tar.gz
