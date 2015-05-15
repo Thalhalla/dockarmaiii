@@ -5,6 +5,12 @@ ENV STEAMER_UPDATED 20150513
 # override these variables in your Dockerfile
 ENV STEAM_USERNAME anonymous
 ENV STEAM_PASSWORD ' '
+# and override this file with the script to install your server
+ADD ./steamer.txt /home/steam/steamer.txt
+RUN chmod 755 /home/steam/steamer.txt
+# and override this file with the command to start your server
+ADD ./run.sh /run.sh
+RUN chmod 755 /run.sh
 
 RUN echo 'deb http://http.debian.net/debian/ jessie main contrib non-free'>>/etc/apt/sources.list
 RUN dpkg --add-architecture i386
@@ -19,11 +25,7 @@ RUN sudo -i -u steam mkdir /home/steam/steamcmd
 RUN sudo -i -u steam cd /home/steam/steamcmd && sudo -i -u steam wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
 RUN sudo -i -u steam cd /home/steam/steamcmd && sudo -i -u steam tar zxvf steamcmd_linux.tar.gz
 
-ADD ./steamer.txt /home/steam/steamer.txt
-RUN chmod 755 /home/steam/steamer.txt
 
-ADD ./run.sh /run.sh
-RUN chmod 755 /run.sh
 ADD ./start.sh /start.sh
 RUN chmod 755 /start.sh
 ENTRYPOINT ["/start.sh"]
