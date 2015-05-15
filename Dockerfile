@@ -3,6 +3,10 @@ MAINTAINER Josh Cox <josh 'at' webhosting coop>
 
 ENV DOCKARMAIII_UPDATED 20150513
 
+# Create the directories used to store the profile files and Arma3.cfg file
+RUN sudo -i -u steam mkdir -p "~/.local/share/Arma 3"
+RUN sudo -i -u steam mkdir -p "~/.local/share/Arma 3 - Other Profiles"
+
 # Override the default steamer.txt file
 ADD ./steamer.txt /home/steam/steamer.txt
 RUN chmod 755 /home/steam/steamer.txt
