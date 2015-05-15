@@ -37,9 +37,6 @@ rm-image:
 
 cleanfiles:
 	rm name
-	rm repo
-	rm proxy
-	rm proxyport
 
 rm: kill rm-image
 
