@@ -6,9 +6,9 @@ help:
 	@echo ""  This is merely a base image for usage read the README file
 	@echo ""   1. make run       - build and run docker container
 
-build: steamer.txt builddocker beep rm-steamer
+build: steamer.tmpl builddocker beep rm-steamer
 
-run: steamer.txt builddocker rundocker beep rm-steamer
+run: steamer.tmpl builddocker rundocker beep rm-steamer
 
 rundocker:
 	@docker run --name=dockarmaiii \
@@ -34,10 +34,10 @@ rm-steamer:
 rm-name:
 	rm  name
 
-steamer.txt:
-	cp steamer.tpl steamer.txt
-	sed -i s/REPLACEME_USERNAME/`cat steam_username`/ steamer.txt
-	sed -i s/REPLACEME_PASSWORD/`cat steam_password`/ steamer.txt
+steamer.tmpl:
+	cp steamer.tpl steamer.tmpl
+	sed -i s/REPLACEME_USERNAME/`cat steam_username`/ steamer.tmpl
+	sed -i s/REPLACEME_PASSWORD/`cat steam_password`/ steamer.tmpl
 
 rm-image:
 	@docker rm `cat cid`
