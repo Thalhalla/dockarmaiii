@@ -1,7 +1,10 @@
 #!/bin/bash
 
 cd /home/steam
-sed -i "s/steamuser=\"username\"/steameruser=\"$STEAM_USERNAME\"/" arma3server
-sed -i "s/steampass=\"password\"/steamerpass=\"$STEAM_PASSWORD\"/" arma3server
-./arma3server install
+echo sed
+sed -i 's/steamuser="username"/steamuser=REPLACE_USER/' arma3server
+sed -i 's/steampass="password"/steampass=REPLACE_PASSWORD/' arma3server
+sed -i "s/steamuser=REPLACE_USER/steamuser='$STEAM_USERNAME'/" arma3server
+sed -i "s/steampass=REPLACE_PASSWORD/steampass='$STEAM_PASSWORD'/" arma3server
+yes y|./arma3server install
 bash /home/steam/run.sh

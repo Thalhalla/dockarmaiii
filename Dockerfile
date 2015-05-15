@@ -8,6 +8,7 @@ ENV STEAMER_UPDATED 20150513
 ENV STEAM_USERNAME anonymous
 ENV STEAM_PASSWORD ' '
 # and override this file with the command to start your server
+USER root
 ADD ./run.sh /run.sh
 RUN chmod 755 /run.sh
 # Override the default start.sh
@@ -19,6 +20,7 @@ USER steam
 # Create the directories used to store the profile files and Arma3.cfg file
 RUN mkdir -p "~/.local/share/Arma 3"
 RUN mkdir -p "~/.local/share/Arma 3 - Other Profiles"
+RUN rm -Rf /home/steam/steamcmd
 WORKDIR /home/steam
 RUN wget http://gameservermanagers.com/dl/arma3server
 RUN chmod +x arma3server

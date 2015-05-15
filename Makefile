@@ -6,14 +6,16 @@ help:
 	@echo ""  This is merely a base image for usage read the README file
 	@echo ""   1. make run       - build and run docker container
 
-build: steamer.tmpl builddocker beep rm-steamer
+build: builddocker beep
 
-run: steamer.tmpl builddocker rundocker beep rm-steamer
+run: steam_username steam_password builddocker rundocker beep
 
 rundocker:
 	@docker run --name=dockarmaiii \
 	--cidfile="cid" \
 	-v /tmp:/tmp \
+	--env STEAM_USERNAME=`cat steam_username` \
+	--env STEAM_PASSWORD=`cat steam_password` \
 	-v /var/run/docker.sock:/run/docker.sock \
 	-v $(shell which docker):/bin/docker \
 	-t thalhalla/dockarmaiii
@@ -34,11 +36,6 @@ rm-steamer:
 rm-name:
 	rm  name
 
-steamer.tmpl:
-	cp steamer.tpl steamer.tmpl
-	sed -i s/REPLACEME_USERNAME/`cat steam_username`/ steamer.tmpl
-	sed -i s/REPLACEME_PASSWORD/`cat steam_password`/ steamer.tmpl
-
 rm-image:
 	@docker rm `cat cid`
 	@rm cid
@@ -55,7 +52,6 @@ clean: cleanfiles rm
 enter:
 	docker exec -i -t `cat cid` /bin/bash
 
-# will skip over this step if the name file is left from previous run 'make clean' to remove
 steam_username:
 	@while [ -z "$$STEAM_USERNAME" ]; do \
 		read -r -p "Enter the steam username you wish to associate with this DockArmaIII container [STEAM_USERNAME]: " STEAM_USERNAME; echo "$$STEAM_USERNAME">>steam_username; cat steam_username; \
