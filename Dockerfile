@@ -21,9 +21,10 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN useradd -m -s /bin/bash steam
 RUN usermod -a -G video,audio steam
 USER steam
-RUN sudo -i -u steam mkdir /home/steam/steamcmd
-RUN sudo -i -u steam cd /home/steam/steamcmd && sudo -i -u steam wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
-RUN sudo -i -u steam cd /home/steam/steamcmd && sudo -i -u steam tar zxvf steamcmd_linux.tar.gz
+RUN mkdir /home/steam/steamcmd
+WORKDIR /home/steam/steamcmd
+RUN wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
+RUN tar zxvf steamcmd_linux.tar.gz
 
 
 ADD ./start.sh /start.sh
