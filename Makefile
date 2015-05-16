@@ -8,7 +8,7 @@ help:
 
 build: builddocker beep
 
-run: steam_username steam_password builddocker rundocker beep
+run: steam_username steam_password steam_guard_code builddocker rundocker beep
 
 rundocker:
 	@docker run --name=dockarmaiii \
@@ -16,6 +16,7 @@ rundocker:
 	-v /tmp:/tmp \
 	--env STEAM_USERNAME=`cat steam_username` \
 	--env STEAM_PASSWORD=`cat steam_password` \
+	--env STEAM_GUARD_CODE=`cat steam_guard_code` \
 	-v /var/run/docker.sock:/run/docker.sock \
 	-v $(shell which docker):/bin/docker \
 	-t thalhalla/dockarmaiii
@@ -55,6 +56,11 @@ enter:
 steam_username:
 	@while [ -z "$$STEAM_USERNAME" ]; do \
 		read -r -p "Enter the steam username you wish to associate with this DockArmaIII container [STEAM_USERNAME]: " STEAM_USERNAME; echo "$$STEAM_USERNAME">>steam_username; cat steam_username; \
+	done ;
+
+steam_guard_code:
+	@while [ -z "$$STEAM_GUARD_CODE" ]; do \
+		read -r -p "Enter the steam guard code you wish to associate with this DockArmaIII container [STEAM_GUARD_CODE]: " STEAM_GUARD_CODE; echo "$$STEAM_GUARD_CODE">>steam_guard_code; cat steam_guard_code; \
 	done ;
 
 steam_password:
