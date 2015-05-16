@@ -5,7 +5,7 @@ MAINTAINER Josh Cox <josh 'at' webhosting coop>
 RUN echo 'deb http://http.debian.net/debian/ jessie main contrib non-free'>>/etc/apt/sources.list
 RUN dpkg --add-architecture i386
 RUN apt-get -y update
-RUN apt-get install -y lib32gcc1 sudo wget lib32stdc++6 lib32z1 lib32z1-dev net-tools bsdmainutils tmux
+RUN apt-get install -y sudo wget lib32stdc++6 lib32z1 lib32z1-dev net-tools bsdmainutils tmux mailutils postfix ca-certificates lib32gcc1 libstdc++6:i386
 RUN rm -rf /var/lib/apt/lists/*
 
 ENV STEAMER_UPDATED 20150513
