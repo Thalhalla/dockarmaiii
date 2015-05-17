@@ -8,7 +8,7 @@ RUN apt-get -y update
 RUN apt-get install -y lib32gcc1 sudo wget lib32stdc++6 lib32z1 lib32z1-dev
 RUN rm -rf /var/lib/apt/lists/*
 
-ENV STEAMER_UPDATED 20150513
+ENV STEAMER_UPDATED 20150517
 # override these variables in your Dockerfile
 ENV STEAM_USERNAME anonymous
 ENV STEAM_PASSWORD ' '
