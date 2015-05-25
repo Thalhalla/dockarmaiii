@@ -1,7 +1,7 @@
 FROM joshuacox/steamer
 MAINTAINER Josh Cox <josh 'at' webhosting coop>
 
-ENV DOCKARMAIII_UPDATED 20150518
+ENV DOCKARMAIII_UPDATED 20150525
 
 ENV STEAMER_UPDATED 20150513
 # override these variables in your Dockerfile
