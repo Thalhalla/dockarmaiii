@@ -2,7 +2,7 @@ FROM joshuacox/steamer
 MAINTAINER Josh Cox <josh 'at' webhosting coop>
 
 USER root
-ENV DOCKARMAIII_UPDATED 20150629
+ENV DOCKARMAIII_UPDATED 20150706
 
 # override these variables in your Dockerfile
 ENV STEAM_USERNAME anonymous
