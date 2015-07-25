@@ -20,9 +20,8 @@ rundocker:
 	-p 2302:2302/udp \
 	-p 2303:2303/udp \
 	-p 2304:2304/udp \
-	-p 2305:2305/udp \
-	-p 2344:2344/udp \
-	-p 2345:2345/udp \
+	-p 2344:2344/tcp \
+	-p 2345:2345/tcp \
 	-v /var/run/docker.sock:/run/docker.sock \
 	-v $(shell which docker):/bin/docker \
 	-t thalhalla/dockarmaiii
