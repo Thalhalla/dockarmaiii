@@ -31,8 +31,8 @@ RUN mkdir -p "~/.local/share/Arma 3 - Other Profiles"
 WORKDIR /home/steam
 RUN wget http://gameservermanagers.com/dl/arma3server
 RUN chmod +x arma3server
-# install wasteland
-# WORKDIR /home/steam/steamcmd/arma3
-# RUN curl -SsL -o mpmissions/A3Wasteland_v1.0b.Altis.pbo https://github.com/crosbymichael/Release_Files/raw/master/A3Wasteland_v1.0b.Altis.pbo
+### install wasteland
+### WORKDIR /home/steam/steamcmd/arma3
+### RUN curl -SsL -o mpmissions/A3Wasteland_v1.0b.Altis.pbo https://github.com/crosbymichael/Release_Files/raw/master/A3Wasteland_v1.0b.Altis.pbo
 
 ENTRYPOINT ["/start.sh"]
