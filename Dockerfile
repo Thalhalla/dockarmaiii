@@ -17,13 +17,16 @@ ENV STEAM_PASSWORD ' '
 ENV STEAM_GUARD_CODE ' '
 # and override this file with the command to start your server
 USER root
+RUN echo 'new-session' >> ~/.tmux.conf
 ADD ./run.sh /run.sh
 RUN chmod 755 /run.sh
 # Override the default start.sh
 ADD ./start.sh /start.sh
 RUN chmod 755 /start.sh
+RUN gpasswd -a steam tty
 
 USER steam
+RUN echo 'new-session' >> ~/.tmux.conf
 # Create the directories used to store the profile files and Arma3.cfg file
 RUN mkdir -p "~/.local/share/Arma 3"
 RUN mkdir -p "~/.local/share/Arma 3 - Other Profiles"
