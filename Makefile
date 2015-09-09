@@ -13,7 +13,6 @@ run: steam_username steam_password steam_guard_code builddocker rundocker beep
 rundocker:
 	@docker run --name=dockarmaiii \
 	--cidfile="cid" \
-	-v /tmp:/tmp \
 	--env STEAM_USERNAME=`cat steam_username` \
 	--env STEAM_PASSWORD=`cat steam_password` \
 	--env STEAM_GUARD_CODE=`cat steam_guard_code` \

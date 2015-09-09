@@ -17,7 +17,6 @@ ENV STEAM_PASSWORD ' '
 ENV STEAM_GUARD_CODE ' '
 # and override this file with the command to start your server
 USER root
-RUN echo 'new-session' >> ~/.tmux.conf
 ADD ./run.sh /run.sh
 RUN chmod 755 /run.sh
 # Override the default start.sh
