@@ -8,7 +8,7 @@ RUN apt-get -y update
 RUN apt-get install -y sudo wget lib32stdc++6 lib32z1 lib32z1-dev net-tools bsdmainutils tmux mailutils postfix ca-certificates lib32gcc1 libstdc++6:i386
 RUN rm -rf /var/lib/apt/lists/*
 
-ENV STEAMER_UPDATED 20150906
+ENV STEAMER_UPDATED 20150913
 # override these variables in your Dockerfile
 ENV STEAM_USERNAME anonymous
 ENV STEAM_PASSWORD ' '
