@@ -1,8 +1,8 @@
-FROM joshuacox/steamer
-MAINTAINER Josh Cox <josh 'at' webhosting coop>
+FROM thalhalla/steamer
+MAINTAINER Josh Cox <josh 'at' webhosting coop>, James S. Moore <james@ohmydocker.com>
 
 USER root
-ENV DOCKARMAIII_UPDATED 20150725
+ENV DOCKARMAIII_UPDATED 2015121201
 
 EXPOSE 2302
 EXPOSE 2303
