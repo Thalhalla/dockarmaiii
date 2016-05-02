@@ -1,8 +1,8 @@
 FROM thalhalla/steamer
+
 MAINTAINER Josh Cox <josh 'at' webhosting coop>, James S. Moore <james@ohmydocker.com>
 
-USER root
-ENV DOCKARMAIII_UPDATED 2015121201
+ENV DOCKARMAIII_UPDATED 2016050201
 
 EXPOSE 2302
 EXPOSE 2303
@@ -12,29 +12,42 @@ EXPOSE 2344
 EXPOSE 2345
 
 # override these variables in your Dockerfile
-ENV STEAM_USERNAME anonymous
-ENV STEAM_PASSWORD ' '
-ENV STEAM_GUARD_CODE ' '
+#ENV STEAM_USERNAME ' '
+#ENV STEAM_PASSWORD ' '
+#ENV IP ' '
+#ENV TARGET_IP ' '
+#ENV SERVER_PASSWORD ' '
+
 # and override this file with the command to start your server
 USER root
-ADD ./run.sh /run.sh
-RUN chmod 755 /run.sh
-# Override the default start.sh
-ADD ./start.sh /start.sh
-RUN chmod 755 /start.sh
+RUN apt-get update \
+    && apt-get -y install curl libcurl3 vim less rsync
+
+#COPY ./start.sh /start.sh
+#RUN chmod 755 /start.sh
+COPY ./a3update.txt /home/steam/a3update.txt
+RUN chmod 644 /home/steam/a3update.txt
+
+WORKDIR /home/steam/steamcmd
+
+RUN tar xvfz steamcmd_linux.tar.gz \
+	&& chown -R steam. /home/steam
+
+# ensure steam user is in tty group
 RUN gpasswd -a steam tty
 
+# switch to steam user
 USER steam
-RUN echo 'new-session' >> ~/.tmux.conf
-# Create the directories used to store the profile files and Arma3.cfg file
-RUN mkdir -p "~/.local/share/Arma 3"
-RUN mkdir -p "~/.local/share/Arma 3 - Other Profiles"
-# RUN rm -Rf /home/steam/steamcmd
-WORKDIR /home/steam
-RUN wget http://gameservermanagers.com/dl/arma3server
-RUN chmod +x arma3server
-### install wasteland
-### WORKDIR /home/steam/steamcmd/arma3
-### RUN curl -SsL -o mpmissions/A3Wasteland_v1.0b.Altis.pbo https://github.com/crosbymichael/Release_Files/raw/master/A3Wasteland_v1.0b.Altis.pbo
 
-ENTRYPOINT ["/start.sh"]
+RUN /home/steam/steamcmd/steamcmd.sh \
+        +runscript /home/steam/a3update.txt
+
+# Default tmux session
+# Create the directories used to store the profile files and Arma3.cfg file
+WORKDIR /home/steam
+RUN echo 'new-session' >> ~/.tmux.conf 
+RUN mkdir -p "/home/steam/.local/share/Arma 3" \
+    && mkdir -p "/home/steam/.local/share/Arma 3 - Other Profiles"
+
+#ENTRYPOINT ["/start.sh"]
+ENTRYPOINT ["/bin/bash"]
