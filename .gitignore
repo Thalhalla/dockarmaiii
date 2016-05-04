@@ -1,6 +1,8 @@
 cid
-steam_password
-steam_username
-steam_guard_code
-steamer.txt
-steamer.tmpl
+IP
+NAME
+SERVER_PASSWORD
+STEAM_PASSWORD
+STEAM_USERNAME
+TAG
+TARGET_IP
