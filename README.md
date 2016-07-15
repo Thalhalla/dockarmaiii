@@ -2,7 +2,6 @@
 Docker that contains steam, caution steam can cause severe burns!
 
 ## Usage
-replace `assets/steamer.txt` with a custom script of your own, and replace `assets/run.sh` with the server command then 
 
 `make install`
 
@@ -16,6 +15,8 @@ follow the prompts
 you look for newer scripts [here](https://github.com/Gousaid67/steam-cmd-installer)
 
 with your game server installed you can then
+replace `assets/steamer.txt` with a custom script of your own,
+and replace `assets/run.sh` with the server command then finally
 
 `make run`
 
