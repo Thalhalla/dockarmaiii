@@ -4,5 +4,5 @@
 @NoPromptForPassword 1
 login REPLACEME_USERNAME REPLACEME_PASSWORD
 force_install_dir ../csgo_ds
-app_update 740 validate
+app_update REPLACEME_GID validate
 quit
