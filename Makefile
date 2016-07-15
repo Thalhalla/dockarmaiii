@@ -59,6 +59,7 @@ installdocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE HOMEDIR
 	-v $(HOMEDIR)/.local:/home/steam/.steam \
 	-v $(HOMEDIR)/SteamLibrary:/home/steam/SteamLibrary \
 	-v $(HOMEDIR)/Steam:/home/steam/Steam \
+	-v $(HOMEDIR)/Steam:/home/steam/steamcmd \
 	-t joshuacox/steamer /bin/bash
 
 builddocker:
@@ -110,10 +111,11 @@ STEAM_PASSWORD:
 		read -r -p "Enter the steam password you wish to associate with this container [STEAM_PASSWORD]: " STEAM_PASSWORD; echo "$$STEAM_PASSWORD">>STEAM_PASSWORD; cat STEAM_PASSWORD; \
 	done ;
 
-homedir:
+homedir: HOMEDIR
 	$(eval HOMEDIR := $(shell cat HOMEDIR))	
 	-@sudo mkdir -p $(HOMEDIR)/SteamLibrary/steamapps
 	-@sudo mkdir -p $(HOMEDIR)/Steam
+	-@sudo mkdir -p $(HOMEDIR)/steamcmd
 	-@sudo mkdir -p $(HOMEDIR)/.steam
 	-@sudo mkdir -p $(HOMEDIR)/.local
 	-@sudo chown -R 1000:1000 $(HOMEDIR)
