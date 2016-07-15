@@ -10,7 +10,7 @@ RUN rm -rf /var/lib/apt/lists/*
 
 ENV STEAMER_UPDATED 20151104
 
-# override these variables in your Dockerfile
+# override these variables in with the prompts
 ENV STEAM_USERNAME anonymous
 ENV STEAM_PASSWORD ' '
 
