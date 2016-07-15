@@ -2,7 +2,22 @@
 Docker that contains steam, caution steam can cause severe burns!
 
 ## Usage
-replace steamer.txt with a custom script of your own, and replace run.sh with the server command then `make run`
+replace `assets/steamer.txt` with a custom script of your own, and replace `assets/run.sh` with the server command then 
+
+`make install`
+
+then to enter the container:
+`make enter`
+
+where you can then install by doing `/assets/steamcmdinstaller3.9.sh`
+
+follow the prompts
+
+you look for newer scripts [here](https://github.com/Gousaid67/steam-cmd-installer)
+
+with your game server installed you can then
+
+`make run`
 
 ## Caveats
 Because of the Steam Guard Token. You must get into the VM, login as the steam user and incant `/home/steam/steamcmd/steamcmd.sh`,

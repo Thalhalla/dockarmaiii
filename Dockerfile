@@ -15,14 +15,13 @@ ENV STEAMER_UPDATED 20160715
 ENV STEAM_USERNAME anonymous
 ENV STEAM_PASSWORD ' '
 
-# and override this file with the script to install your server
-COPY ./steamer.txt /home/steam/steamer.txt
 
 # and override this file with the command to start your server
 COPY assets /assets
 RUN chmod 755 /assets/start.sh ; \
 chmod 755 /assets/run.sh ; \
 chmod 755 /assets/steamer.txt ; \
+chmod 755 /assets/steamcmdinstaller3.9.sh ; \
 useradd -m -s /bin/bash steam ; \
 usermod -a -G sudo,video,audio steam ; \
 echo '%sudo ALL=(ALL) NOPASSWD:ALL'>> /etc/sudoers ; \
@@ -30,7 +29,6 @@ chown -R steam. /home/steam
 
 USER steam
 WORKDIR /home/steam/
-COPY steamcmdinstaller3.9.sh  /steamcmdinstaller3.9.sh
 
 
 #USER root
