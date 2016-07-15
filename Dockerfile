@@ -19,23 +19,20 @@ ENV STEAM_PASSWORD ' '
 COPY ./steamer.txt /home/steam/steamer.txt
 
 # and override this file with the command to start your server
-COPY ./run.sh /run.sh
-COPY ./start.sh /start.sh
-RUN chmod 755 /start.sh ; \
-chmod 755 /run.sh ; \
-chmod 755 /home/steam/steamer.txt ; \
+COPY assets /assets
+RUN chmod 755 /assets/start.sh ; \
+chmod 755 /assets/run.sh ; \
+chmod 755 /assets/steamer.txt ; \
 useradd -m -s /bin/bash steam ; \
 usermod -a -G sudo,video,audio steam ; \
 echo '%sudo ALL=(ALL) NOPASSWD:ALL'>> /etc/sudoers ; \
-mkdir -p /home/steam/steamcmd ; \
 chown -R steam. /home/steam
 
 USER steam
-WORKDIR /home/steam/steamcmd
-COPY steamcmdinstaller3.9.sh  /steamcmdinstaller3.9.sh
 WORKDIR /home/steam/
+COPY steamcmdinstaller3.9.sh  /steamcmdinstaller3.9.sh
 
 
-#CMD ["/bin/bash",  "/start.sh"]
 #USER root
-ENTRYPOINT ["/bin/bash"]
+#ENTRYPOINT ["/bin/bash"]
+CMD ["/bin/bash",  "/assets/start.sh"]

@@ -11,6 +11,8 @@ build: builddocker beep
 
 run: builddocker rm HOMEDIR homedir rundocker beep
 
+install: builddocker rm HOMEDIR homedir installdocker
+
 rundocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE HOMEDIR
 	$(eval TMP := $(shell mktemp -d --suffix=DOCKERTMP))
 	$(eval NAME := $(shell cat NAME))	
@@ -32,7 +34,32 @@ rundocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE HOMEDIR
 	-v $(HOMEDIR)/.steam:/home/steam/.local \
 	-v $(HOMEDIR)/.local:/home/steam/.steam \
 	-v $(HOMEDIR)/SteamLibrary:/home/steam/SteamLibrary \
+	-v $(HOMEDIR)/Steam:/home/steam/Steam \
 	-t joshuacox/steamer
+
+installdocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE HOMEDIR
+	$(eval TMP := $(shell mktemp -d --suffix=DOCKERTMP))
+	$(eval NAME := $(shell cat NAME))	
+	$(eval HOMEDIR := $(shell cat HOMEDIR))	
+	$(eval TAG := $(shell cat TAG))
+	$(eval STEAM_USERNAME := $(shell cat STEAM_USERNAME))
+	$(eval STEAM_PASSWORD := $(shell cat STEAM_PASSWORD))
+	$(eval STEAM_GID := $(shell cat STEAM_GID))
+	chmod 777 $(TMP)
+	@docker run --name=steamer \
+	-d \
+	--cidfile="steamerCID" \
+	--env USER=steam \
+	--env STEAM_USERNAME=$(STEAM_USERNAME) \
+	--env STEAM_PASSWORD=$(STEAM_PASSWORD) \
+	--env STEAM_GID=$(STEAM_GID) \
+	--env STEAM_GUARD_CODE=$(STEAM_GUARD_CODE) \
+	-v $(TMP):/tmp \
+	-v $(HOMEDIR)/.steam:/home/steam/.local \
+	-v $(HOMEDIR)/.local:/home/steam/.steam \
+	-v $(HOMEDIR)/SteamLibrary:/home/steam/SteamLibrary \
+	-v $(HOMEDIR)/Steam:/home/steam/Steam \
+	-t joshuacox/steamer /bin/bash
 
 builddocker:
 	/usr/bin/time -v docker build -t joshuacox/steamer .
@@ -86,6 +113,7 @@ STEAM_PASSWORD:
 homedir:
 	$(eval HOMEDIR := $(shell cat HOMEDIR))	
 	-@sudo mkdir -p $(HOMEDIR)/SteamLibrary/steamapps
+	-@sudo mkdir -p $(HOMEDIR)/Steam
 	-@sudo mkdir -p $(HOMEDIR)/.steam
 	-@sudo mkdir -p $(HOMEDIR)/.local
 	-@sudo chown -R 1000:1000 $(HOMEDIR)
