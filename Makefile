@@ -81,7 +81,7 @@ rm: kill rm-image
 clean:  rm
 
 logs:
-	docker logs `cat steamerCID`
+	docker logs  -f `cat steamerCID`
 
 enter:
 	docker exec -i -t `cat steamerCID` /bin/bash
