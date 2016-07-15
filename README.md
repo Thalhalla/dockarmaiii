@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/joshuacox/steamer.png?label=ready&title=Ready)](https://waffle.io/joshuacox/steamer)
 # steamer
 Docker that contains steam, caution steam can cause severe burns!
 
