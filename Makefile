@@ -24,7 +24,7 @@ rundocker: STEAM_USERNAME STEAM_PASSWORD STEAM_GUARD_CODE HOMEDIR
 	--env STEAM_PASSWORD=$(STEAM_PASSWORD) \
 	--env STEAM_GUARD_CODE=$(STEAM_GUARD_CODE) \
 	-v $(TMP):/tmp \
-	-v $(HOMEDIR)/:/home/steam/ \
+	-v $(HOMEDIR)/:/home/steam \
 	-t joshuacox/steamer
 
 builddocker:
