@@ -1,0 +1,7 @@
+// update_csgo_ds.txt
+//
+@ShutdownOnFailedCommand 1 //set to 0 if updating multiple servers at once
+@NoPromptForPassword 1
+login REPLACEME_USERNAME REPLACEME_PASSWORD
+app_update REPLACEME_GID validate
+quit
