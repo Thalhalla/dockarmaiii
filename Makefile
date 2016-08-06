@@ -22,7 +22,7 @@ rundocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE HOMEDIR
 	$(eval STEAM_PASSWORD := $(shell cat STEAM_PASSWORD))
 	$(eval STEAM_GID := $(shell cat STEAM_GID))
 	chmod 777 $(TMP)
-	@docker run --name=steamer \
+	@docker run --name=$(NAME) \
 	-d \
 	--cidfile="steamerCID" \
 	--env USER=steam \
@@ -35,7 +35,7 @@ rundocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE HOMEDIR
 	-v $(HOMEDIR)/.local:/home/steam/.steam \
 	-v $(HOMEDIR)/SteamLibrary:/home/steam/SteamLibrary \
 	-v $(HOMEDIR)/Steam:/home/steam/Steam \
-	-t joshuacox/steamer
+	-t $(TAG)
 
 installdocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE HOMEDIR
 	$(eval TMP := $(shell mktemp -d --suffix=DOCKERTMP))
@@ -60,10 +60,11 @@ installdocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE HOMEDIR
 	-v $(HOMEDIR)/SteamLibrary:/home/steam/SteamLibrary \
 	-v $(HOMEDIR)/Steam:/home/steam/Steam \
 	-v $(HOMEDIR)/Steam:/home/steam/steamcmd \
-	-t joshuacox/steamer /bin/bash
+	-t $(TAG) /bin/bash
 
 builddocker:
-	/usr/bin/time -v docker build -t joshuacox/steamer .
+	$(eval TAG := $(shell cat TAG))	
+	/usr/bin/time -v docker build -t $(TAG) .
 
 beep:
 	@echo "beep"

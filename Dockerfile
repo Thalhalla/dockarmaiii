@@ -9,7 +9,7 @@ apt-get install -y sudo wget lib32stdc++6 lib32z1 lib32z1-dev net-tools ; \
 bsdmainutils tmux mailutils postfix ca-certificates lib32gcc1 libstdc++6:i386 ; \
 rm -rf /var/lib/apt/lists/*
 
-ENV STEAMER_UPDATED 20160715
+ENV STEAMER_UPDATED 20160806
 
 # override these variables in with the prompts
 ENV STEAM_USERNAME anonymous
