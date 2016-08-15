@@ -64,7 +64,7 @@ installdocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE TAG HOME
 	-v $(HOMEDIR)/Steam:/home/steam/steamcmd \
 	-t $(TAG) /bin/bash
 
-builddocker:
+builddocker: TAG
 	$(eval TAG := $(shell cat TAG))
 	/usr/bin/time -v docker build -t $(TAG) .
 
