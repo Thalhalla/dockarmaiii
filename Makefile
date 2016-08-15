@@ -89,6 +89,11 @@ logs:
 enter:
 	docker exec -i -t `cat steamerCID` /bin/bash
 
+TAG:
+	@while [ -z "$$TAG" ]; do \
+		read -r -p "Enter the TAG you wish to associate with this container [TAG]: " TAG; echo "$$TAG">>TAG; cat TAG; \
+	done ;
+
 HOMEDIR:
 	@while [ -z "$$HOMEDIR" ]; do \
 		read -r -p "Enter the HOMEDIR you wish to associate with this container [HOMEDIR]: " HOMEDIR; echo "$$HOMEDIR">>HOMEDIR; cat HOMEDIR; \
