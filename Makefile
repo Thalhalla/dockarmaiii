@@ -24,6 +24,8 @@ rundocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE HOMEDIR
 	chmod 777 $(TMP)
 	@docker run --name=steamer \
 	-d \
+	-P \
+	--net=host \
 	--cidfile="steamerCID" \
 	--env USER=steam \
 	--env STEAM_USERNAME=$(STEAM_USERNAME) \
