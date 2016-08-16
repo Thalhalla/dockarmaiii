@@ -9,14 +9,15 @@ help:
 
 build: builddocker beep
 
-run: builddocker rm TAG HOMEDIR homedir rundocker beep
+run: builddocker rm TAG IP HOMEDIR homedir rundocker beep
 
-install: builddocker rm TAG HOMEDIR homedir installdocker
+install: builddocker rm TAG IP HOMEDIR homedir installdocker
 
-rundocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE TAG HOMEDIR
+rundocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE TAG IP HOMEDIR
 	$(eval TMP := $(shell mktemp -d --suffix=DOCKERTMP))
 	$(eval NAME := $(shell cat NAME))	
 	$(eval HOMEDIR := $(shell cat HOMEDIR))	
+	$(eval IP := $(shell cat IP))
 	$(eval TAG := $(shell cat TAG))
 	$(eval STEAM_USERNAME := $(shell cat STEAM_USERNAME))
 	$(eval STEAM_PASSWORD := $(shell cat STEAM_PASSWORD))
@@ -24,8 +25,13 @@ rundocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE TAG HOMEDIR
 	chmod 777 $(TMP)
 	@docker run --name=$(NAME) \
 	-d \
-	-P \
-	--net=host \
+	-p $(IP):2302:2302/udp \
+        -p $(IP):2303:2303/udp \
+        -p $(IP):2304:2304/udp \
+        -p $(IP):2305:2305/udp \
+        -p $(IP):2344:2344/tcp \
+        -p $(IP):2344:2344/udp \
+        -p $(IP):2345:2345/tcp \
 	--cidfile="steamerCID" \
 	--env USER=steam \
 	--env STEAM_USERNAME=$(STEAM_USERNAME) \
@@ -44,12 +50,20 @@ installdocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE TAG HOME
 	$(eval NAME := $(shell cat NAME))	
 	$(eval HOMEDIR := $(shell cat HOMEDIR))	
 	$(eval TAG := $(shell cat TAG))
+	$(eval IP := $(shell cat IP))
 	$(eval STEAM_USERNAME := $(shell cat STEAM_USERNAME))
 	$(eval STEAM_PASSWORD := $(shell cat STEAM_PASSWORD))
 	$(eval STEAM_GID := $(shell cat STEAM_GID))
 	chmod 777 $(TMP)
 	@docker run --name=steamer \
 	-d \
+	-p $(IP):2302:2302/udp \
+        -p $(IP):2303:2303/udp \
+        -p $(IP):2304:2304/udp \
+        -p $(IP):2305:2305/udp \
+        -p $(IP):2344:2344/tcp \
+        -p $(IP):2344:2344/udp \
+        -p $(IP):2345:2345/tcp \
 	--cidfile="steamerCID" \
 	--env USER=steam \
 	--env STEAM_USERNAME=$(STEAM_USERNAME) \
@@ -97,6 +111,11 @@ TAG:
 HOMEDIR:
 	@while [ -z "$$HOMEDIR" ]; do \
 		read -r -p "Enter the HOMEDIR you wish to associate with this container [HOMEDIR]: " HOMEDIR; echo "$$HOMEDIR">>HOMEDIR; cat HOMEDIR; \
+	done ;
+
+IP:
+	@while [ -z "$$IP" ]; do \
+		read -r -p "Enter the IP Address you wish to assign to this container [IP]: " IP; echo "$$IP">>IP; cat IP; \
 	done ;
 
 STEAM_USERNAME:
