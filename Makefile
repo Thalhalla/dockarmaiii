@@ -7,16 +7,16 @@ help:
 	@echo ""  This is merely a base image for usage read the README file
 	@echo ""   1. make run       - build and run docker container
 
-build: builddocker beep
+build: builddocker
 
-run: builddocker rm TAG IP HOMEDIR homedir rundocker beep
+run: builddocker rm TAG IP HOMEDIR homedir rundocker
 
 install: builddocker rm TAG IP HOMEDIR homedir installdocker
 
 rundocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE TAG IP HOMEDIR
 	$(eval TMP := $(shell mktemp -d --suffix=DOCKERTMP))
-	$(eval NAME := $(shell cat NAME))	
-	$(eval HOMEDIR := $(shell cat HOMEDIR))	
+	$(eval NAME := $(shell cat NAME))
+	$(eval HOMEDIR := $(shell cat HOMEDIR))
 	$(eval IP := $(shell cat IP))
 	$(eval TAG := $(shell cat TAG))
 	$(eval STEAM_USERNAME := $(shell cat STEAM_USERNAME))
@@ -26,12 +26,12 @@ rundocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE TAG IP HOMED
 	@docker run --name=$(NAME) \
 	-d \
 	-p $(IP):2302:2302/udp \
-        -p $(IP):2303:2303/udp \
-        -p $(IP):2304:2304/udp \
-        -p $(IP):2305:2305/udp \
-        -p $(IP):2344:2344/tcp \
-        -p $(IP):2344:2344/udp \
-        -p $(IP):2345:2345/tcp \
+  -p $(IP):2303:2303/udp \
+  -p $(IP):2304:2304/udp \
+  -p $(IP):2305:2305/udp \
+  -p $(IP):2344:2344/tcp \
+  -p $(IP):2344:2344/udp \
+  -p $(IP):2345:2345/tcp \
 	--cidfile="steamerCID" \
 	--env USER=steam \
 	--env STEAM_USERNAME=$(STEAM_USERNAME) \
@@ -48,8 +48,8 @@ rundocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE TAG IP HOMED
 
 installdocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE TAG HOMEDIR
 	$(eval TMP := $(shell mktemp -d --suffix=DOCKERTMP))
-	$(eval NAME := $(shell cat NAME))	
-	$(eval HOMEDIR := $(shell cat HOMEDIR))	
+	$(eval NAME := $(shell cat NAME))
+	$(eval HOMEDIR := $(shell cat HOMEDIR))
 	$(eval TAG := $(shell cat TAG))
 	$(eval IP := $(shell cat IP))
 	$(eval STEAM_USERNAME := $(shell cat STEAM_USERNAME))
@@ -59,12 +59,12 @@ installdocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE TAG HOME
 	@docker run --name=steamer \
 	-d \
 	-p $(IP):2302:2302/udp \
-        -p $(IP):2303:2303/udp \
-        -p $(IP):2304:2304/udp \
-        -p $(IP):2305:2305/udp \
-        -p $(IP):2344:2344/tcp \
-        -p $(IP):2344:2344/udp \
-        -p $(IP):2345:2345/tcp \
+  -p $(IP):2303:2303/udp \
+  -p $(IP):2304:2304/udp \
+  -p $(IP):2305:2305/udp \
+  -p $(IP):2344:2344/tcp \
+  -p $(IP):2344:2344/udp \
+  -p $(IP):2345:2345/tcp \
 	--cidfile="steamerCID" \
 	--env USER=steam \
 	--env STEAM_USERNAME=$(STEAM_USERNAME) \
@@ -80,7 +80,7 @@ installdocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE TAG HOME
 	-t $(TAG) /bin/bash
 
 builddocker: TAG
-	$(eval TAG := $(shell cat TAG))	
+	$(eval TAG := $(shell cat TAG))
 	/usr/bin/time -v docker build -t $(TAG) .
 
 beep:
@@ -140,7 +140,7 @@ STEAM_PASSWORD:
 	done ;
 
 homedir: HOMEDIR
-	$(eval HOMEDIR := $(shell cat HOMEDIR))	
+	$(eval HOMEDIR := $(shell cat HOMEDIR))
 	-@sudo mkdir -p $(HOMEDIR)/SteamLibrary/steamapps
 	-@sudo mkdir -p $(HOMEDIR)/Steam
 	-@sudo mkdir -p $(HOMEDIR)/steamcmd
