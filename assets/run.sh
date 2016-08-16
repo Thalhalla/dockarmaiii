@@ -1,4 +1,3 @@
 #!/bin/bash
-#cd /home/steam/SteamLibrary
-#./srcds_run -game csgo -console -usercon +game_type 1 +game_mode 1 +mapgroup mg_demolition +map de_lake
-/bin/bash
+/bin/bash /home/steam/arma3/arma3server.sh -ip=4.31.168.84 -port=2302
+#/bin/bash
