@@ -7,13 +7,13 @@ help:
 	@echo ""  This is merely a base image for usage read the README file
 	@echo ""   1. make run       - build and run docker container
 
-build: builddocker
+build: builddocker armaiii
 
 run: builddocker rm TAG IP HOMEDIR homedir rundocker
 
 install: builddocker rm TAG IP HOMEDIR homedir installdocker
 
-rundocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE TAG IP HOMEDIR
+rundocker: STEAM_USERNAME armaiii STEAM_PASSWORD STEAM_GUARD_CODE TAG IP HOMEDIR
 	$(eval TMP := $(shell mktemp -d --suffix=DOCKERTMP))
 	$(eval NAME := $(shell cat NAME))
 	$(eval HOMEDIR := $(shell cat HOMEDIR))
@@ -147,3 +147,6 @@ homedir: HOMEDIR
 	-@sudo mkdir -p $(HOMEDIR)/.steam
 	-@sudo mkdir -p $(HOMEDIR)/.local
 	-@sudo chown -R 1000:1000 $(HOMEDIR)
+
+armaiii:
+	echo 233780 > STEAM_GID
