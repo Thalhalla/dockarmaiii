@@ -13,7 +13,7 @@ USER root
 COPY assets /assets
 RUN chmod 755 /assets/start.sh ; \
 chmod 755 /assets/run.sh ; \
-chmod 755 /assets/steamer.txt ; \
+chmod 755 /assets/steamer.txt
 
 USER steam
 
