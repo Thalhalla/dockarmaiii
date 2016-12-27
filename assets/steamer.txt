@@ -1,6 +1,4 @@
-// update_csgo_ds.txt
-//
-@ShutdownOnFailedCommand 1 //set to 0 if updating multiple servers at once
+@ShutdownOnFailedCommand 1
 @NoPromptForPassword 1
 login REPLACEME_USERNAME REPLACEME_PASSWORD
 force_install_dir /home/steam/arma3
