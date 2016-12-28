@@ -11,14 +11,13 @@ ENV STEAM_PASSWORD ' '
 ENV STEAM_GID 233780
 
 USER root
-ENV fuckit 0
 # and override this file with the command to start your server
 COPY assets /assets
 RUN chmod 755 /assets/start.sh ; \
 chmod 755 /assets/run.sh ; \
 chmod 755 /assets/lgsm.sh ; \
 chmod 755 /assets/steamer.txt
-RUN usermod -G tty steam
+RUN gpasswd -a steam tty
 
 #RUN apt-get install -y wget vim procps
 USER steam

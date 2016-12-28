@@ -16,7 +16,6 @@ run: start rundocker
 install: start installdocker
 
 rundocker:
-	$(eval TMP := $(shell mktemp -d --suffix=DOCKERTMP))
 	$(eval NAME := $(shell cat NAME))
 	$(eval HOMEDIR := $(shell cat HOMEDIR))
 	$(eval IP := $(shell cat IP))
@@ -25,7 +24,6 @@ rundocker:
 	$(eval STEAM_USERNAME := $(shell cat STEAM_USERNAME))
 	$(eval STEAM_PASSWORD := $(shell cat STEAM_PASSWORD))
 	$(eval STEAM_GID := $(shell cat STEAM_GID))
-	chmod 777 $(TMP)
 	@docker run --name=$(NAME) \
 	-d \
 	-p $(IP):2302:2302/udp \
@@ -43,16 +41,16 @@ rundocker:
 	--env STEAM_GUARD_CODE=$(STEAM_GUARD_CODE) \
 	--env IP=$(IP) \
 	--env PORT=$(PORT) \
-	-v $(TMP):/tmp \
 	-v $(HOMEDIR)/.steam:/home/steam/.local \
 	-v $(HOMEDIR)/.local:/home/steam/.steam \
 	-v $(HOMEDIR)/SteamLibrary:/home/steam/SteamLibrary \
 	-v $(HOMEDIR)/Steam:/home/steam/Steam \
 	-v $(HOMEDIR)/steamcmd:/home/steam/steamcmd \
+	-v $(HOMEDIR)/serverfiles:/home/steam/serverfiles \
+	-v $(HOMEDIR)/log:/home/steam/log \
 	-t $(TAG)
 
 installdocker:
-	$(eval TMP := $(shell mktemp -d --suffix=DOCKERTMP))
 	$(eval NAME := $(shell cat NAME))
 	$(eval HOMEDIR := $(shell cat HOMEDIR))
 	$(eval TAG := $(shell cat TAG))
@@ -61,8 +59,7 @@ installdocker:
 	$(eval STEAM_USERNAME := $(shell cat STEAM_USERNAME))
 	$(eval STEAM_PASSWORD := $(shell cat STEAM_PASSWORD))
 	$(eval STEAM_GID := $(shell cat STEAM_GID))
-	chmod 777 $(TMP)
-	@docker run --name=steamer \
+	@docker run --name=$(NAME) \
 	-d \
 	-p $(IP):2302:2302/udp \
 	-p $(IP):2303:2303/udp \
@@ -79,21 +76,18 @@ installdocker:
 	--env STEAM_GUARD_CODE=$(STEAM_GUARD_CODE) \
 	--env IP=$(IP) \
 	--env PORT=$(PORT) \
-	-v $(TMP):/tmp \
 	-v $(HOMEDIR)/.steam:/home/steam/.local \
 	-v $(HOMEDIR)/.local:/home/steam/.steam \
 	-v $(HOMEDIR)/SteamLibrary:/home/steam/SteamLibrary \
 	-v $(HOMEDIR)/Steam:/home/steam/Steam \
 	-v $(HOMEDIR)/steamcmd:/home/steam/steamcmd \
+	-v $(HOMEDIR)/serverfiles:/home/steam/serverfiles \
+	-v $(HOMEDIR)/log:/home/steam/log \
 	-t $(TAG) /bin/bash
 
 builddocker: TAG
 	$(eval TAG := $(shell cat TAG))
 	/usr/bin/time -v docker build -t $(TAG) .
-
-beep:
-	@echo "beep"
-	@aplay /usr/share/sounds/alsa/Front_Center.wav
 
 kill:
 	-@docker kill `cat steamerCID`
