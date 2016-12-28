@@ -9,15 +9,18 @@ help:
 
 build: builddocker armaiii
 
-run: builddocker rm TAG IP HOMEDIR homedir rundocker
+start: builddocker rm TAG IP PORT HOMEDIR homedir armaiii STEAM_USERNAME STEAM_PASSWORD STEAM_GUARD_CODE homedir
 
-install: builddocker rm TAG IP HOMEDIR homedir installdocker
+run: start rundocker
 
-rundocker: STEAM_USERNAME armaiii STEAM_PASSWORD STEAM_GUARD_CODE TAG IP HOMEDIR
+install: start installdocker
+
+rundocker:
 	$(eval TMP := $(shell mktemp -d --suffix=DOCKERTMP))
 	$(eval NAME := $(shell cat NAME))
 	$(eval HOMEDIR := $(shell cat HOMEDIR))
 	$(eval IP := $(shell cat IP))
+	$(eval PORT := $(shell cat PORT))
 	$(eval TAG := $(shell cat TAG))
 	$(eval STEAM_USERNAME := $(shell cat STEAM_USERNAME))
 	$(eval STEAM_PASSWORD := $(shell cat STEAM_PASSWORD))
@@ -26,18 +29,20 @@ rundocker: STEAM_USERNAME armaiii STEAM_PASSWORD STEAM_GUARD_CODE TAG IP HOMEDIR
 	@docker run --name=$(NAME) \
 	-d \
 	-p $(IP):2302:2302/udp \
-  -p $(IP):2303:2303/udp \
-  -p $(IP):2304:2304/udp \
-  -p $(IP):2305:2305/udp \
-  -p $(IP):2344:2344/tcp \
-  -p $(IP):2344:2344/udp \
-  -p $(IP):2345:2345/tcp \
+	-p $(IP):2303:2303/udp \
+	-p $(IP):2304:2304/udp \
+	-p $(IP):2305:2305/udp \
+	-p $(IP):2344:2344/tcp \
+	-p $(IP):2344:2344/udp \
+	-p $(IP):2345:2345/tcp \
 	--cidfile="steamerCID" \
 	--env USER=steam \
 	--env STEAM_USERNAME=$(STEAM_USERNAME) \
 	--env STEAM_PASSWORD=$(STEAM_PASSWORD) \
 	--env STEAM_GID=$(STEAM_GID) \
 	--env STEAM_GUARD_CODE=$(STEAM_GUARD_CODE) \
+	--env IP=$(IP) \
+	--env PORT=$(PORT) \
 	-v $(TMP):/tmp \
 	-v $(HOMEDIR)/.steam:/home/steam/.local \
 	-v $(HOMEDIR)/.local:/home/steam/.steam \
@@ -46,12 +51,13 @@ rundocker: STEAM_USERNAME armaiii STEAM_PASSWORD STEAM_GUARD_CODE TAG IP HOMEDIR
 	-v $(HOMEDIR)/steamcmd:/home/steam/steamcmd \
 	-t $(TAG)
 
-installdocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE TAG HOMEDIR
+installdocker:
 	$(eval TMP := $(shell mktemp -d --suffix=DOCKERTMP))
 	$(eval NAME := $(shell cat NAME))
 	$(eval HOMEDIR := $(shell cat HOMEDIR))
 	$(eval TAG := $(shell cat TAG))
 	$(eval IP := $(shell cat IP))
+	$(eval PORT := $(shell cat PORT))
 	$(eval STEAM_USERNAME := $(shell cat STEAM_USERNAME))
 	$(eval STEAM_PASSWORD := $(shell cat STEAM_PASSWORD))
 	$(eval STEAM_GID := $(shell cat STEAM_GID))
@@ -59,18 +65,20 @@ installdocker: STEAM_USERNAME STEAM_GID STEAM_PASSWORD STEAM_GUARD_CODE TAG HOME
 	@docker run --name=steamer \
 	-d \
 	-p $(IP):2302:2302/udp \
-  -p $(IP):2303:2303/udp \
-  -p $(IP):2304:2304/udp \
-  -p $(IP):2305:2305/udp \
-  -p $(IP):2344:2344/tcp \
-  -p $(IP):2344:2344/udp \
-  -p $(IP):2345:2345/tcp \
+	-p $(IP):2303:2303/udp \
+	-p $(IP):2304:2304/udp \
+	-p $(IP):2305:2305/udp \
+	-p $(IP):2344:2344/tcp \
+	-p $(IP):2344:2344/udp \
+	-p $(IP):2345:2345/tcp \
 	--cidfile="steamerCID" \
 	--env USER=steam \
 	--env STEAM_USERNAME=$(STEAM_USERNAME) \
 	--env STEAM_PASSWORD=$(STEAM_PASSWORD) \
 	--env STEAM_GID=$(STEAM_GID) \
 	--env STEAM_GUARD_CODE=$(STEAM_GUARD_CODE) \
+	--env IP=$(IP) \
+	--env PORT=$(PORT) \
 	-v $(TMP):/tmp \
 	-v $(HOMEDIR)/.steam:/home/steam/.local \
 	-v $(HOMEDIR)/.local:/home/steam/.steam \
@@ -114,10 +122,18 @@ HOMEDIR:
 		read -r -p "Enter the HOMEDIR you wish to associate with this container [HOMEDIR]: " HOMEDIR; echo "$$HOMEDIR">>HOMEDIR; cat HOMEDIR; \
 	done ;
 
-IP:
+ASKIP:
 	@while [ -z "$$IP" ]; do \
 		read -r -p "Enter the IP Address you wish to assign to this container [IP]: " IP; echo "$$IP">>IP; cat IP; \
 	done ;
+
+PORT:
+	@while [ -z "$$PORT" ]; do \
+		read -r -p "Enter the PORT Address you wish to assign to this container [PORT]: " PORT; echo "$$PORT">>PORT; cat PORT; \
+	done ;
+
+IP:
+	curl icanhazip.com > IP
 
 STEAM_USERNAME:
 	@while [ -z "$$STEAM_USERNAME" ]; do \
