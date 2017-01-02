@@ -6,3 +6,10 @@
 
 # LGSM way
 /assets/lgsm.sh
+sleep 10
+#tail -f /var/steam/log/console/arma3-server-console.log
+while [1] 
+do
+sleep 60
+echo sleep
+done
