@@ -17,7 +17,6 @@ RUN chmod 755 /assets/start.sh ; \
 chmod 755 /assets/run.sh ; \
 chmod 755 /assets/lgsm.sh ; \
 chmod 755 /assets/steamer.txt
-RUN gpasswd -a steam tty
 
 #RUN apt-get install -y wget vim procps
 USER steam
