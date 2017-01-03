@@ -1,9 +1,9 @@
 FROM thalhalla/steamer
 MAINTAINER Josh Cox <josh 'at' webhosting coop>
 
-ENV LANG en_US.UTF-8 
+ENV LANG en_US.UTF-8
 
-ENV DOCKARMAIII_UPDATED 20161228
+ENV DOCKARMAIII_UPDATED 20170103
 
 # override these variables in with the prompts
 ENV STEAM_USERNAME anonymous
