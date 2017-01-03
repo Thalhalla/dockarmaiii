@@ -1,5 +1,6 @@
 #!/bin/bash
 cd /home/steam
+rm arma3server
 wget -c https://gameservermanagers.com/dl/arma3server
 chmod +x arma3server
 sed -i "s/username/$STEAM_USERNAME/" /home/steam/arma3server
