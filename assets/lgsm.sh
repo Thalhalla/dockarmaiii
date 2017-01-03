@@ -9,4 +9,5 @@ sed -i "s/ip=\"0\.0\.0\.0\"/ip=\"$IP\"/" /home/steam/arma3server
 sed -i "s/port=\"2302\"/port=\"$PORT\"/" /home/steam/arma3server
 
 /home/steam/arma3server auto-install
+sudo chown -R steam. /home/steam
 /home/steam/arma3server start

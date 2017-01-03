@@ -16,7 +16,8 @@ COPY assets /assets
 RUN chmod 755 /assets/start.sh ; \
 chmod 755 /assets/run.sh ; \
 chmod 755 /assets/lgsm.sh ; \
-chmod 755 /assets/steamer.txt
+chmod 755 /assets/steamer.tx ; \
+chown -R steam. /home/steam
 
 #RUN apt-get install -y wget vim procps
 USER steam
