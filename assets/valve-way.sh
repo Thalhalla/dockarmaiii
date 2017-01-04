@@ -7,3 +7,6 @@ sed -i "s/REPLACEME_USERNAME/$STEAM_USERNAME/" steamer.txt
 sed -i "s/REPLACEME_PASSWORD/$STEAM_PASSWORD/" steamer.txt
 sed -i "s/REPLACEME_GID/$STEAM_GID/" steamer.txt
 bash /home/steam/steamcmd/steamcmd.sh +runscript /home/steam/steamer.txt
+
+cd /home/steam/serverfiles/arma3
+./arma3server -netlog -ip=172.17.0.3 -port=2302 -cfg=/home/steam/serverfiles/arma3/cfg/arma3-server.network.cfg -config=/home/steam/arma3/serverfiles/cfg/arma3-server.server.cfg -mod= -servermod= -bepath= -autoinit -loadmissiontomemory
