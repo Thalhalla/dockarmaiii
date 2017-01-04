@@ -3,25 +3,35 @@ Docker that contains steam, caution steam can cause severe burns!
 
 ## Usage
 
-`make install`
+##### Local build
+`make build`
 
-then to enter the container:
-`make enter`
+to build the image locally
 
-where you can then install by doing `/assets/steamcmdinstaller3.9.sh`
+##### Pull
+or `make pull` to pull the image from docker hub
 
-follow the prompts
-
-you can look for newer scripts [here](https://github.com/Gousaid67/steam-cmd-installer) 
-which is where I found the above steamcmdinstaller3.9.sh
-
-with your game server installed you can then
-replace `assets/steamer.txt` with a custom script of your own,
-and replace `assets/run.sh` with the server command then finally
+##### Run
+after which you can run with
 
 `make run`
 
+### MAnual Install
+after pulling or building:
+
+`make install`
+
+will start the container with `/bin/bash` so you can go in and verify
+the install goes fine, which you can do by `make enter` to enter the container.
+
+where you can then install by doing `/assets/start.sh`
+
+alternatively you can do this all manually:
+
 ## Caveats
+
+I make a dedicated serving account and turn off steamguard, otherwise
+you have to wade through the notes below:
 
 #### old method 
 
