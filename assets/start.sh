@@ -2,6 +2,7 @@
 
 sudo chown -R steam. /home/steam
 #mkdir /home/steam/serverfiles/arma3
+cp /opt/steamer/arma3server /home/steam/
 
 # ArmA3
 mkdir -p "/home/steam/.local/share/Arma 3"
