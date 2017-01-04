@@ -30,9 +30,6 @@ rundocker:
 	-p $(IP):2303:2303/udp \
 	-p $(IP):2304:2304/udp \
 	-p $(IP):2305:2305/udp \
-	-p $(IP):2344:2344/tcp \
-	-p $(IP):2344:2344/udp \
-	-p $(IP):2345:2345/tcp \
 	--cidfile="steamerCID" \
 	--env USER=steam \
 	--env STEAM_USERNAME=$(STEAM_USERNAME) \
@@ -41,13 +38,7 @@ rundocker:
 	--env STEAM_GUARD_CODE=$(STEAM_GUARD_CODE) \
 	--env IP=$(IP) \
 	--env PORT=$(PORT) \
-	-v $(HOMEDIR)/.steam:/home/steam/.local \
-	-v $(HOMEDIR)/.local:/home/steam/.steam \
-	-v $(HOMEDIR)/SteamLibrary:/home/steam/SteamLibrary \
-	-v $(HOMEDIR)/Steam:/home/steam/Steam \
-	-v $(HOMEDIR)/steamcmd:/home/steam/steamcmd \
-	-v $(HOMEDIR)/serverfiles:/home/steam/serverfiles \
-	-v $(HOMEDIR)/log:/home/steam/log \
+	-v $(HOMEDIR):/home/steam
 	-t $(TAG)
 
 installdocker:
@@ -65,9 +56,6 @@ installdocker:
 	-p $(IP):2303:2303/udp \
 	-p $(IP):2304:2304/udp \
 	-p $(IP):2305:2305/udp \
-	-p $(IP):2344:2344/tcp \
-	-p $(IP):2344:2344/udp \
-	-p $(IP):2345:2345/tcp \
 	--cidfile="steamerCID" \
 	--env USER=steam \
 	--env STEAM_USERNAME=$(STEAM_USERNAME) \
@@ -76,13 +64,7 @@ installdocker:
 	--env STEAM_GUARD_CODE=$(STEAM_GUARD_CODE) \
 	--env IP=$(IP) \
 	--env PORT=$(PORT) \
-	-v $(HOMEDIR)/.steam:/home/steam/.local \
-	-v $(HOMEDIR)/.local:/home/steam/.steam \
-	-v $(HOMEDIR)/SteamLibrary:/home/steam/SteamLibrary \
-	-v $(HOMEDIR)/Steam:/home/steam/Steam \
-	-v $(HOMEDIR)/steamcmd:/home/steam/steamcmd \
-	-v $(HOMEDIR)/serverfiles:/home/steam/serverfiles \
-	-v $(HOMEDIR)/log:/home/steam/log \
+	-v $(HOMEDIR):/home/steam
 	-t $(TAG) /bin/bash
 
 builddocker: TAG
