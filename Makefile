@@ -160,3 +160,7 @@ homedir: HOMEDIR
 
 armaiii:
 	echo 233780 > STEAM_GID
+
+pull:
+	$(eval TAG := $(shell cat TAG))
+	docker pull $(TAG)
