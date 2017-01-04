@@ -38,7 +38,7 @@ rundocker:
 	--env STEAM_GUARD_CODE=$(STEAM_GUARD_CODE) \
 	--env IP=$(IP) \
 	--env PORT=$(PORT) \
-	-v $(HOMEDIR):/home/steam
+	-v $(HOMEDIR):/home/steam \
 	-t $(TAG)
 
 installdocker:
@@ -64,7 +64,7 @@ installdocker:
 	--env STEAM_GUARD_CODE=$(STEAM_GUARD_CODE) \
 	--env IP=$(IP) \
 	--env PORT=$(PORT) \
-	-v $(HOMEDIR):/home/steam
+	-v $(HOMEDIR):/home/steam \
 	-t $(TAG) /bin/bash
 
 builddocker: TAG
