@@ -1,5 +1,6 @@
 #!/bin/bash
 
+mkdir -p /home/steam/serverfiles/arma3
 cp /assets/steamer.txt /home/steam/
 cd /home/steam
 #ln -s '/home/steam/Steam/steamapps/common/Arma 3 Server' arma3
