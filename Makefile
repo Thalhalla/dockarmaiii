@@ -9,7 +9,7 @@ help:
 
 build: builddocker armaiii
 
-start: builddocker rm TAG IP PORT HOMEDIR homedir armaiii STEAM_USERNAME STEAM_PASSWORD STEAM_GUARD_CODE homedir
+start: rm TAG IP PORT HOMEDIR homedir armaiii STEAM_USERNAME STEAM_PASSWORD STEAM_GUARD_CODE homedir
 
 run: start rundocker
 
