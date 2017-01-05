@@ -10,7 +10,3 @@ cd /home/steam/
 
 # https://steamcommunity.com/discussions/forum/1/618456760281557146/?ctp=2
 sudo chown -R steam. /home/steam
-
-# Start
-cd /home/steam
-/opt/steamer/arma3server start
