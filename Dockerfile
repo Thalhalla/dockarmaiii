@@ -10,7 +10,7 @@ USER root
 # and override this file with the command to start your server
 COPY assets /assets
 RUN chmod 755 /assets/*.sh && \
-chmod 755 /assets/steamer.tx && \
+chmod 755 /assets/steamer.txt && \
 chown -R steam. /home/steam && \
 chown -R steam. /opt/steamer
 
