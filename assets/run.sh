@@ -11,7 +11,7 @@ cd /home/steam
 cd /home/steam/serverfiles
 while [ 1 ]
 do
-    ./arma3server -netlog -ip=0.0.0.0 -port=$PORT -cfg=/home/steam/serverfiles/cfg/arma3-server.network.cfg -config=/home/steam/serverfiles/cfg/arma3-server.server.cfg -mod= -servermod= -bepath= -autoinit -loadmissiontomemory
+    ./arma3server headlessClients[]={"$CLIENT_IP", "$CLIENT_IP2", "$CLIENT_IP3", "$CLIENT_IP4", "$CLIENT_IP5", "$CLIENT_IP6" } -netlog -ip=0.0.0.0 -port=$PORT -cfg=/home/steam/serverfiles/cfg/arma3-server.network.cfg -config=/home/steam/serverfiles/cfg/arma3-server.server.cfg -mod= -servermod= -bepath= -autoinit -loadmissiontomemory
     sleep 3
     echo restarting
     sleep 3
