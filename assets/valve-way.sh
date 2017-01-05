@@ -9,6 +9,4 @@ sed -i "s/REPLACEME_PASSWORD/$STEAM_PASSWORD/" steamer.txt
 sed -i "s/REPLACEME_GID/$STEAM_GID/" steamer.txt
 
 cd /opt/steamer
-tar zxf /opt/steamer/steamcmd_linux.tar.gz
 ./steamcmd.sh +runscript /home/steam/steamer.txt
-
