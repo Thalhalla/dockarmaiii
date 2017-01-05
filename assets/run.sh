@@ -8,10 +8,11 @@ cd /home/steam
 # LGSM way
 /bin/bash /assets/valve-way.sh
 #tail -f /var/steam/log/console/arma3-server-console.log
-sleep 60
-echo sleep
+cd /home/steam/serverfiles/arma3
 while [ 1 ]
 do
-    echo sleep
-    sleep 300
+    ./arma3server -netlog -ip=0.0.0.0 -port=$PORT -cfg=/home/steam/serverfiles/arma3/cfg/arma3-server.network.cfg -config=/home/steam/arma3/serverfiles/cfg/arma3-server.server.cfg -mod= -servermod= -bepath= -autoinit -loadmissiontomemory
+    sleep 3
+    echo restarting
+    sleep 3
 done
