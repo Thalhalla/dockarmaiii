@@ -13,16 +13,18 @@ then
 	echo "$file found."
 else
 	echo "$file not found. Installing"
-  /bin/bash /assets/install.sh
+  #/bin/bash /assets/install.sh
 fi
 
-/home/steam/arma3server start
+/bin/bash /assets/install.sh
+
+/opt/steamer/arma3server start
 sleep 10
 #tail -f /var/steam/log/console/arma3-server-console.log
 sleep 60
 echo sleep
 while [ 1 ]
 do
-    /home/steam/arma3server monitor
+    /opt/steamer/arma3server monitor
     sleep 300
 done
