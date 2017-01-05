@@ -13,4 +13,4 @@ sudo chown -R steam. /home/steam
 
 # Start
 cd /home/steam
-/home/steam/arma3server start
+/opt/steamer/arma3server start
