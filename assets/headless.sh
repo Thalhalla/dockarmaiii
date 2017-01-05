@@ -11,6 +11,9 @@ cd /home/steam
 /bin/bash /assets/install.sh
 
 #/opt/steamer/arma3server start
+echo 'Show environment vars'
+echo "ServerIP = $SERVER_IP"
+echo "ServerPORT = $SERVER_PORT"
 echo start the headless client here
 sleep 10
 #tail -f /var/steam/log/console/arma3-server-console.log
