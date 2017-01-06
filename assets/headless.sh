@@ -16,11 +16,10 @@ echo "ServerPORT = $SERVER_PORT"
 
 #tail -f /var/steam/log/console/arma3-server-console.log
 cd /home/steam/serverfiles
-./arma3server -client -connect=$SERVER_IP -port=$SERVER_PORT
 
 while [ 1 ]
 do
-    /opt/steamer/arma3server monitor
+    ./arma3server -client -connect=$SERVER_IP -port=$SERVER_PORT
     echo monitor the headless client here
     sleep 300
 done
