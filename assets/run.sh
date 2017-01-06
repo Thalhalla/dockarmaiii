@@ -7,6 +7,7 @@ cd /home/steam
 
 # LGSM way
 /bin/bash /assets/valve-way.sh
+/bin/bash /assets/config.sh
 #tail -f /var/steam/log/console/arma3-server-console.log
 cd /home/steam/serverfiles
 while [ 1 ]
