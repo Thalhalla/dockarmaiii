@@ -7,6 +7,7 @@ sudo chown -R steam. /home/steam
 mkdir -p "/home/steam/.local/share/Arma 3"
 mkdir -p "/home/steam/.local/share/Arma 3 - Other Profiles"
 #tail -f /var/steam/log/console/arma3-server-console.log
+/bin/bash /assets/config.sh
 cd /home/steam/serverfiles
 while [ 1 ]
 do
