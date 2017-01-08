@@ -1,6 +1,5 @@
 #!/bin/bash
 
-sudo chown -R steam. /home/steam
 #mkdir /home/steam/serverfiles/arma3
 
 # ArmA3
