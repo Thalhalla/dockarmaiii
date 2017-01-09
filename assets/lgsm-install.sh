@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo chown -R steam. /home/steam
+sudo chown -R steam:steam /home/steam
 
 # ArmA3
 mkdir -p "/home/steam/.local/share/Arma 3"
@@ -14,3 +14,4 @@ sed -i "s/ip=\"0\.0\.0\.0\"/ip=\"$IP\"/" ./arma3server
 sed -i "s/port=\"2302\"/port=\"$PORT\"/" ./arma3server
 
 ./arma3server auto-install
+sudo chown -R steam:steam /home/steam

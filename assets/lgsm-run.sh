@@ -1,7 +1,7 @@
 #!/bin/bash
-cd /home/steam
 
 /assets/config.sh
+cd /home/steam
 /opt/steamer/arma3server start
 sleep 10
 while [ 1 ]
