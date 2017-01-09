@@ -10,3 +10,4 @@ sed -i "s/REPLACEME_GID/$STEAM_GID/" steamer.txt
 
 cd /opt/steamer
 ./steamcmd.sh +runscript /home/steam/steamer.txt
+cd /home/steam
