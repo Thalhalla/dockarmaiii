@@ -13,5 +13,6 @@ sed -i "s/password/$STEAM_PASSWORD/" ./arma3server
 sed -i "s/ip=\"0\.0\.0\.0\"/ip=\"$IP\"/" ./arma3server
 sed -i "s/port=\"2302\"/port=\"$PORT\"/" ./arma3server
 
-./arma3server auto-install
+cd /home/steam
+/opt/steamer/arma3server auto-install
 sudo chown -R steam:steam /home/steam
