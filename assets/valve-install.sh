@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sudo chown -R steam:steam /home/steam
 mkdir -p /home/steam/serverfiles/arma3
 cp /assets/steamer.txt /home/steam/
 cd /home/steam
