@@ -5,6 +5,12 @@ ENV DOCKARMAIII_UPDATED 20170104
 
 # override these variables in with the prompts
 ENV STEAM_GID 233780
+ENV CLIENT_IP  10.42.227.21
+ENV CLIENT_IP2 10.42.227.22
+ENV CLIENT_IP3 10.42.227.23
+ENV CLIENT_IP4 10.42.227.24
+ENV CLIENT_IP5 10.42.227.25
+ENV CLIENT_IP6 10.42.227.26
 
 USER root
 # and override this file with the command to start your server
