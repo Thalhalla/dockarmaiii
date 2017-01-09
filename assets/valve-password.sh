@@ -1,5 +1,6 @@
 #!/bin/bash
 
+/bin/bash /assets/valve-insall.sh
 cd /home/steam
 
 /bin/bash /assets/password.sh
