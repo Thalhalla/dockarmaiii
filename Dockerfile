@@ -20,4 +20,4 @@ RUN wget -q https://gameservermanagers.com/dl/arma3server && \
 chmod +x arma3server
 WORKDIR /home/steam
 
-CMD ["/bin/bash",  "/assets/start.sh"]
+CMD ["/bin/bash",  "/assets/valve-start.sh"]

@@ -1,14 +1,11 @@
 #!/bin/bash
 
-sudo chown -R steam. /home/steam
 #mkdir /home/steam/serverfiles/arma3
 
 # ArmA3
 mkdir -p "/home/steam/.local/share/Arma 3"
 mkdir -p "/home/steam/.local/share/Arma 3 - Other Profiles"
 cd /home/steam
-
-/bin/bash /assets/install.sh
 
 #/opt/steamer/arma3server start
 echo "ServerIP = $SERVER_IP"
@@ -19,7 +16,7 @@ cd /home/steam/serverfiles
 
 while [ 1 ]
 do
-    ./arma3server -client -connect=$SERVER_IP -port=$SERVER_PORT
+    ./arma3server -client -connect=$SERVER_IP -port=$SERVER_PORT -password=$GAME_PASSWORD
     echo monitor the headless client here
     sleep 300
 done
