@@ -17,4 +17,4 @@ chown -R steam. /home/steam
 USER steam
 WORKDIR /home/steam
 
-CMD ["/bin/bash",  "/assets/start.sh"]
+CMD ["/bin/bash",  "/assets/valve-start.sh"]
