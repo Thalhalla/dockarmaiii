@@ -15,7 +15,7 @@ do
     ./arma3server -netlog -ip=0.0.0.0 -port=2302 \
       -cfg=/home/steam/serverfiles/cfg/arma3-server.network.cfg \
       -config=/home/steam/serverfiles/cfg/arma3-server.server.cfg \
-      -mod=$DOCKARMAIII_MODS \
+      -mod=$MODS \
       -servermod= \
       -bepath=/home/steam/serverfiles/battleye \
       -autoinit \
