@@ -10,7 +10,7 @@ mkdir -p "/home/steam/.local/share/Arma 3 - Other Profiles"
 cd /home/steam/serverfiles
 while [ 1 ]
 do
-    ./arma3server -netlog -ip=0.0.0.0 -port=$PORT -cfg=/home/steam/serverfiles/cfg/arma3-server.network.cfg -config=/home/steam/serverfiles/cfg/arma3-server.server.cfg -mod=$MODS -servermod= -bepath= -autoinit -loadmissiontomemory
+    ./arma3server -netlog -ip=0.0.0.0 -port=2302 -cfg=/home/steam/serverfiles/cfg/arma3-server.network.cfg -config=/home/steam/serverfiles/cfg/arma3-server.server.cfg -mod=$DOCKARMAIII_MODS -servermod= -bepath= -autoinit -loadmissiontomemory
     sleep 3
     echo restarting
     sleep 3
