@@ -17,4 +17,3 @@ chmod +x ./arma3server
 sed -i "s/username/$STEAM_USERNAME/" ./arma3server
 sed -i "s/password/$STEAM_PASSWORD/" ./arma3server
 sed -i "s/ip=\"0\.0\.0\.0\"/ip=\"$IP\"/" ./arma3server
-sed -i "s/port=\"2302\"/port=\"$PORT\"/" ./arma3server
