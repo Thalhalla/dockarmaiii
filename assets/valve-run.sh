@@ -12,7 +12,13 @@ cd /home/steam
 cd /home/steam/serverfiles
 while [ 1 ]
 do
-    eval ./arma3server -netlog -ip=0.0.0.0 -port=2302 -cfg=/home/steam/serverfiles/cfg/arma3-server.network.cfg -config=/home/steam/serverfiles/cfg/arma3-server.server.cfg -mod=$MODS -serverMod=$SERVERMODS -bepath=/home/steam/serverfiles/battleye/ -loadMissionToMemory
+    eval ./arma3server -netlog -server -ip=0.0.0.0 -port=2302 \
+      -cfg=/home/steam/serverfiles/cfg/arma3-server.network.cfg \
+      -config=/home/steam/serverfiles/cfg/arma3-server.server.cfg \
+      -mod=$MODS \
+      -serverMod=$SERVERMODS \
+      -bepath=/home/steam/serverfiles/battleye/ \
+      -loadMissionToMemory
     sleep 3
     echo restarting
     sleep 3
