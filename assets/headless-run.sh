@@ -2,12 +2,14 @@
 
 cd /home/steam
 
-#/opt/steamer/arma3server start
+# perform config
+/bin/bash /assets/config.sh
+
+# check the setup
 echo "My IP = $IP"
 echo "Target ServerIP = $SERVER_IP"
 echo "Target ServerPORT = $SERVER_PORT"
-
-/bin/bash /assets/config.sh
+echo "MODS = $MODS"
 
 #tail -f /var/steam/log/console/arma3-server-console.log
 cd /home/steam/serverfiles
