@@ -5,6 +5,8 @@ cd /home/steam
 # perform config
 /bin/bash /assets/config.sh
 
+MODS=$(echo "$MODS"  | sed 's|;|\\;|g')
+
 # check the setup
 echo "My IP = $IP"
 echo "Target ServerIP = $SERVER_IP"
@@ -22,9 +24,9 @@ cmd+="-netlog "
 
 while [ 1 ]
 do
-    echo "executing cmd: $cmd"
-    eval $cmd
-    sleep 30
+    echo "CMD: $cmd"
+    // eval $cmd
+    sleep 600
     echo restarting
     sleep 3
 done

@@ -18,7 +18,6 @@ sed -i "s/username/$STEAM_USERNAME/" ./arma3server
 sed -i "s/password/$STEAM_PASSWORD/" ./arma3server
 sed -i "s/ip=\"0\.0\.0\.0\"/ip=\"$IP\"/" ./arma3server
 
-# format the MODS string to escape @ and ;
-MODS=$(echo "$MODS"  | sed 's|@|\\@|g')
+# format the MODS string to escape ;
 MODS=$(echo "$MODS"  | sed 's|;|\\;|g')
 export MODS=$MODS
