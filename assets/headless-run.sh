@@ -20,6 +20,8 @@ do
       -password=$GAME_PASSWORD \
       -mod="$MODS" \
       -bepath=/home/steam/serverfiles/battleye/ \
+      -name="HeadlessClient" \
+      -profiles="/home/steam/" \
       -netlog
     sleep 3
     echo restarting

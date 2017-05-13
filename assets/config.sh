@@ -21,4 +21,3 @@ sed -i "s/ip=\"0\.0\.0\.0\"/ip=\"$IP\"/" ./arma3server
 # format the MODS string to escape @ and ;
 MODS=$(echo "$MODS"  | sed 's|@|\\@|g')
 MODS=$(echo "$MODS"  | sed 's|;|\\;|g')
-export $MODS
