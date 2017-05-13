@@ -14,16 +14,17 @@ echo "MODS = $MODS"
 #tail -f /var/steam/log/console/arma3-server-console.log
 cd /home/steam/serverfiles
 
+cmd="./arma3server -client -connect=$SERVER_IP -ip=$IP -port=2302 "
+cmd+="-password=$GAME_PASSWORD "
+cmd+="-bepath=/home/steam/serverfiles/battleye "
+cmd+="-mods=$MODS "
+cmd+="-netlog "
+
 while [ 1 ]
 do
-    eval ./arma3server -client -connect=$SERVER_IP -ip=$IP -port=2302 \
-      -password=$GAME_PASSWORD \
-      -mod="$MODS" \
-      -bepath=/home/steam/serverfiles/battleye/ \
-      -name="HeadlessClient" \
-      -profiles="/home/steam/" \
-      -netlog
-    sleep 3
+    echo "executing cmd: $cmd"
+    eval $cmd
+    sleep 30
     echo restarting
     sleep 3
 done
