@@ -19,13 +19,13 @@ cd /home/steam/serverfiles
 cmd="./arma3server -client -connect=$SERVER_IP -ip=$IP -port=$SERVER_PORT "
 cmd+="-password=$GAME_PASSWORD "
 cmd+="-bepath=/home/steam/serverfiles/battleye "
-cmd+="-mods=$MODS "
+cmd+="-mod=$MODS "
 cmd+="-netlog "
 
 while [ 1 ]
 do
     echo "CMD: $cmd"
-    // eval $cmd
+    # eval $cmd
     sleep 600
     echo restarting
     sleep 3
