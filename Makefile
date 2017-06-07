@@ -24,6 +24,7 @@ rundocker:
 	$(eval STEAM_USERNAME := $(shell cat STEAM_USERNAME))
 	$(eval STEAM_PASSWORD := $(shell cat STEAM_PASSWORD))
 	$(eval STEAM_GID := $(shell cat STEAM_GID))
+	$(eval STEAMER_FILE := $(shell cat STEAMER_FILE))
 	@docker run --name=$(NAME) \
 	-d \
 	-p $(IP):2302:2302/udp \
@@ -50,6 +51,7 @@ installdocker:
 	$(eval STEAM_USERNAME := $(shell cat STEAM_USERNAME))
 	$(eval STEAM_PASSWORD := $(shell cat STEAM_PASSWORD))
 	$(eval STEAM_GID := $(shell cat STEAM_GID))
+	$(eval STEAMER_FILE := $(shell cat STEAMER_FILE))
 	@docker run --name=$(NAME) \
 	-d \
 	-p $(IP):2302:2302/udp \
@@ -130,6 +132,11 @@ STEAM_PASSWORD:
 	@while [ -z "$$STEAM_PASSWORD" ]; do \
 		read -r -p "Enter the steam password you wish to associate with this container [STEAM_PASSWORD]: " STEAM_PASSWORD; echo "$$STEAM_PASSWORD">>STEAM_PASSWORD; cat STEAM_PASSWORD; \
 	done ;
+
+STEAMER_FILE:
+		@while [ -z "$$STEAMER_FILE" ]; do \
+			read -r -p "Enter the steamer file name [STEAMER_FILE]: " STEAMER_FILE; echo "$$STEAMER_FILE">>STEAMER_FILE; cat STEAMER_FILE; \
+		done ;
 
 homedir: HOMEDIR
 	$(eval HOMEDIR := $(shell cat HOMEDIR))

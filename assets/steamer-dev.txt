@@ -1,0 +1,7 @@
+@ShutdownOnFailedCommand 1
+@NoPromptForPassword 1
+login REPLACEME_USERNAME REPLACEME_PASSWORD
+force_install_dir /home/steam/serverfiles
+app_update REPLACEME_GID validate
+SET A3BRANCH=107410 -beta development
+quit
