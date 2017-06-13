@@ -24,7 +24,6 @@ rundocker:
 	$(eval STEAM_USERNAME := $(shell cat STEAM_USERNAME))
 	$(eval STEAM_PASSWORD := $(shell cat STEAM_PASSWORD))
 	$(eval STEAM_GID := $(shell cat STEAM_GID))
-	$(eval STEAMER_FILE := $(shell cat STEAMER_FILE))
 	@docker run --name=$(NAME) \
 	-d \
 	-p $(IP):2302:2302/udp \
@@ -51,7 +50,6 @@ installdocker:
 	$(eval STEAM_USERNAME := $(shell cat STEAM_USERNAME))
 	$(eval STEAM_PASSWORD := $(shell cat STEAM_PASSWORD))
 	$(eval STEAM_GID := $(shell cat STEAM_GID))
-	$(eval STEAMER_FILE := $(shell cat STEAMER_FILE))
 	@docker run --name=$(NAME) \
 	-d \
 	-p $(IP):2302:2302/udp \
