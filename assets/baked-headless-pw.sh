@@ -16,7 +16,7 @@ cd /home/steam/serverfiles
 
 while [ 1 ]
 do
-    ./arma3server -client -connect=$SERVER_IP -port=$SERVER_PORT -password=$GAME_PASSWORD
+    ./arma3server -client -connect=$SERVER_IP -port=$SERVER_PORT -password=$GAME_PASSWORD -mod=$MODS
     echo monitor the headless client here
     sleep 300
 done
