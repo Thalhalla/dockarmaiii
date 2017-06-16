@@ -13,8 +13,8 @@ ENV CLIENT_IP5 10.42.227.25
 ENV CLIENT_IP6 10.42.227.26
 
 USER root
-
-RUN apt-get update && apt-get install -y sudo less vim && \
+# install requirements
+RUN apt-get update && apt-get install -y sudo less vim libtbb2:i386 && \
 # remove git and tmp dirs
   apt-get remove -y git cmake linux-headers-amd64 build-essential libssl-dev libboost-dev libboost-thread-dev libboost-system-dev libsqlite3-dev libcurl4-openssl-dev libusb-dev zlib1g-dev libudev-dev && \
      apt-get autoremove -y && \
