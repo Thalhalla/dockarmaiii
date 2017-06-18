@@ -18,6 +18,37 @@ sed -i "s/username/$STEAM_USERNAME/" ./arma3server
 sed -i "s/password/$STEAM_PASSWORD/" ./arma3server
 sed -i "s/ip=\"0\.0\.0\.0\"/ip=\"$IP\"/" ./arma3server
 
+# set the server aspect (--server/--client)
+if [ ! -z ${HEADLESS_CLIENT+x} ]
+  then
+    ASPECT="-client"
+else
+    ASPECT="-server"
+fi
+
 # format the MODS string to escape ;
-MODS=$(echo "$MODS"  | sed 's|;|\\;|g')
-export MODS=$MODS
+export MODS=$(echo "$MODS"  | sed 's|;|\\;|g')
+if [ ! -z ${MODS+x} ]
+  then
+    MODSTRING="-mod=$MODS "
+else
+    MODSTRING=""
+fi
+
+# format the SERVERMODS string to escape ;
+export SERVERMODS=$(echo "$SERVERMODS"  | sed 's|;|\\;|g')
+if [ ! -z ${SERVERMODS+x} ]
+  then
+    SERVERMODSTRING="-mod=$SERVERMODS "
+else
+    SERVERMODSTRING=""
+fi
+
+export CMDSTRING=" -netlog $ASPECT -ip=0.0.0.0 \
+  $PORTSTRING \
+  -cfg=/home/steam/serverfiles/cfg/arma3-server.network.cfg \
+  -config=/home/steam/serverfiles/cfg/arma3-server.server.cfg \
+  $MODSTRING \
+  $SERVERMODSTRING \
+  -bepath=/home/steam/serverfiles/battleye/ \
+  -autoInit -loadMissionToMemory"

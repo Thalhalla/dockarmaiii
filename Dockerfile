@@ -1,7 +1,7 @@
 FROM thalhalla/steamer
 MAINTAINER Josh Cox <josh 'at' webhosting coop>
 
-ENV DOCKARMAIII_UPDATED 20170104
+ENV DOCKARMAIII_UPDATED 2017061801
 
 # override these variables in with the prompts
 ENV STEAM_GID 233780
@@ -21,20 +21,13 @@ RUN apt-get update && apt-get install -y sudo less vim libtbb2:i386 && \
      apt-get clean && \
      rm -rf /var/lib/apt/lists/*
 
-
 # and override this file with the command to start your server
 COPY assets /assets
 RUN chmod 755 /assets/*.sh && \
 chmod 755 /assets/*.cfg && \
 chmod 755 /assets/steamer.txt && \
 chown -R steam. /home/steam && \
-chmod +x /assets/arma3server && \
-cp /assets/arma3server /opt/steamer/ && \
-chown -R steam. /opt/steamer
 
-USER steam
-WORKDIR /opt/steamer
-# RUN wget -q https://gameservermanagers.com/dl/arma3server
 WORKDIR /home/steam
 
-CMD ["/bin/bash",  "/assets/valve-start.sh"]
+CMD ["/bin/bash",  "/assets/controller.sh"]

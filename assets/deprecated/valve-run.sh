@@ -1,9 +1,16 @@
 #!/bin/bash
 
 cd /home/steam
-# valve-install
-# /assets/valve-install.sh
-# /home/steam/arma3/arma3server -ip=4.31.168.84 -port=2302
+
+source /etc/myvars
+
+if [ ! -z ${MODS+x} ]
+  then
+    MODSTRING="-mod=$MODS "
+else
+    MODSTRING=""
+fi
+
 
 # LGSM way
 #/bin/bash /assets/valve-install.sh
@@ -15,7 +22,7 @@ do
     eval ./arma3server -netlog -server -ip=0.0.0.0 -port=2302 \
       -cfg=/home/steam/serverfiles/cfg/arma3-server.network.cfg \
       -config=/home/steam/serverfiles/cfg/arma3-server.server.cfg \
-      -mod=$MODS \
+      $MODSTRING \
       -serverMod=$SERVERMODS \
       -bepath=/home/steam/serverfiles/battleye/ \
       -loadMissionToMemory
