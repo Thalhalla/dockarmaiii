@@ -14,14 +14,13 @@ main() {
       do_config
   fi
 
-  # perform post-install configuration
-  source /assets/config.sh
-
   # and startup
   startup
 }
 
 startup() {
+  # perform post-install configuration
+  source /assets/config.sh
   cd /home/steam/serverfiles
   while [ 1 ]
   do
