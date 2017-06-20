@@ -3,6 +3,11 @@ Docker that contains steam, caution steam can cause severe burns!
 
 ## Usage
 
+### Rancher template
+
+You can find many templates for easy creation using rancher
+[here](https://github.com/Thalhalla/thalhalla-catalog)
+
 ##### Local build
 `make build`
 
