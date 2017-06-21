@@ -25,9 +25,9 @@ startup() {
   while [ 1 ]
   do
     eval ./arma3server $CMDSTRING
-    sleep 30
-    echo "Server stopped. Restarting..."
-    sleep 30
+    sleep 3
+    echo restarting
+    sleep 3
   done
 
 }
@@ -37,8 +37,8 @@ do_update() {
   cd /opt/steamer
   ./steamcmd.sh +runscript /home/steam/steamer.txt
   cd /home/steam
-  date -I > /home/steam/serverfiles/app_update_date
   sudo chown -R steam:steam /home/steam
+  date -I > /home/steam/serverfiles/app_update_date
 }
 
 do_config() {
