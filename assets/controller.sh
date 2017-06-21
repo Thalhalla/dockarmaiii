@@ -2,7 +2,7 @@
 
 main() {
   # perform pre-install configuration
-  source /etc/myvars
+  # source /etc/myvars
 
   if [ ! -z ${FORCEUPDATE+x} ] || [ ! -f /home/steam/serverfiles/app_update_date ]
     then
