@@ -46,4 +46,4 @@ else
     SERVERMODSTRING=""
 fi
 
-export CMDSTRING="-netlog $ASPECT -ip=0.0.0.0 $PORTSTRING -cfg=/home/steam/serverfiles/cfg/arma3-server.network.cfg -config=/home/steam/serverfiles/cfg/arma3-server.server.cfg $MODSTRING $SERVERMODSTRING -bepath=/home/steam/serverfiles/battleye"
+export CMDSTRING="-netlog $ASPECT -pid=/home/steam/serverfiles/arma3server.pid -ranking=/home/steam/serverfiles/ranking.log -ip=0.0.0.0 $PORTSTRING -cfg=/home/steam/serverfiles/cfg/arma3-server.network.cfg -config=/home/steam/serverfiles/cfg/arma3-server.server.cfg $MODSTRING $SERVERMODSTRING -bepath=/home/steam/serverfiles/battleye"
