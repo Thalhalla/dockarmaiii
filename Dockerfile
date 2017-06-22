@@ -30,4 +30,6 @@ chown -R steam. /home/steam
 
 WORKDIR /home/steam
 
+USER steam
+
 CMD ["/bin/bash",  "/assets/controller.sh"]
