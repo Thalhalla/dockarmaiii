@@ -4,14 +4,14 @@ main() {
   # perform pre-install configuration
   # source /etc/myvars
 
-  if [ ! -z ${FORCEUPDATE+x} ] || [ ! -f /home/steam/serverfiles/app_update_date ]
-    then
-      do_update
-  fi
-
   if [ ! -f /home/steam/steamer.txt ]
     then
-      do_config
+      do_steamer_config
+  fi
+
+  if [ ! -z ${FORCEUPDATE+x} ] || [ ! -f /home/steam/serverfiles/app_update_date ]
+    then
+      do_app_update
   fi
 
   # and startup
@@ -33,7 +33,7 @@ startup() {
 
 }
 
-do_update() {
+do_app_update() {
   mkdir -p /home/steam/serverfiles/arma3
   cd /opt/steamer
   ./steamcmd.sh +runscript /home/steam/steamer.txt
@@ -42,7 +42,7 @@ do_update() {
   sudo chown -R steam:steam /home/steam
 }
 
-do_config() {
+do_steamer_config() {
   sudo chown -R steam:steam /home/steam
   cp /assets/steamer.txt /home/steam/
   cd /home/steam
