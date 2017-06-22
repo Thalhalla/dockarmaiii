@@ -25,7 +25,7 @@ startup() {
   while [ 1 ]
   do
     # eval ./arma3server $CMDSTRING
-    echo "/home/steam/serverfiles/arma3server $CMDSTRING"
+    echo "./arma3server $CMDSTRING"
     sleep 1800
     echo restarting
     sleep 3
