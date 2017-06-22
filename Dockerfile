@@ -28,8 +28,6 @@ chmod 755 /assets/*.cfg && \
 chmod 755 /assets/steamer.txt && \
 chown -R steam. /home/steam
 
-WORKDIR /home/steam
-
-USER steam
+WORKDIR /home/steam/serverfiles
 
 CMD ["/bin/bash",  "/assets/controller.sh"]
