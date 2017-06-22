@@ -29,7 +29,7 @@ else
     MODSTRING=""
 fi
 
-# format the MODS string to escape ;
+# set the port
 if [ ! -z ${PORT+x} ]
   then
     PORTSTRING="-port=$PORT"
