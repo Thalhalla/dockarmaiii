@@ -26,9 +26,9 @@ startup() {
   do
     # eval ./arma3server $CMDSTRING
     echo "./arma3server $CMDSTRING"
-    sleep 30
+    sleep 1800
     echo restarting
-    sleep 30
+    sleep 3
   done
 
 }
