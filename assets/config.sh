@@ -12,12 +12,6 @@ sed -i  "s/^passwordAdmin.*/passwordAdmin = \"$ADMIN_PASSWORD\";/" ./arma3-serve
 sed -i  "s/^hostname.*/hostname = \"$HOSTNAME\";/" ./arma3-server.server.cfg
 sed -i  "s/^maxPlayers.*/maxPlayers = \"$MAX_PLAYERS\";/" ./arma3-server.server.cfg
 
-cd /opt/steamer
-chmod +x ./arma3server
-sed -i "s/username/$STEAM_USERNAME/" ./arma3server
-sed -i "s/password/$STEAM_PASSWORD/" ./arma3server
-sed -i "s/ip=\"0\.0\.0\.0\"/ip=\"$IP\"/" ./arma3server
-
 # set the server aspect (--server/--client)
 if [ ! -z ${HEADLESS_CLIENT+x} ]
   then
