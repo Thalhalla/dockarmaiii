@@ -29,6 +29,7 @@ chmod 755 /assets/*.cfg && \
 chmod 755 /assets/steamer.txt && \
 chown -R steam. /home/steam
 
+# WORKDIR must be set to installation dir or controller won't work
 WORKDIR /home/steam/serverfiles
 
 CMD ["/bin/bash",  "/assets/controller.sh"]
