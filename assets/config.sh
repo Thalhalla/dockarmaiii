@@ -29,6 +29,14 @@ else
     MODSTRING=""
 fi
 
+# format the MODS string to escape ;
+if [ ! -z ${PORT+x} ]
+  then
+    PORTSTRING="-port=$PORT"
+else
+    PORTSTRING="-port=2302"
+fi
+
 # format the SERVERMODS string to escape ;
 export SERVERMODS=$(echo "$SERVERMODS"  | sed 's|;|\\;|g')
 if [ ! -z ${SERVERMODS+x} ]
