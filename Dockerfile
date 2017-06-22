@@ -21,9 +21,10 @@ RUN apt-get update && apt-get install -y sudo less vim libtbb2:i386 && \
      apt-get clean && \
      rm -rf /var/lib/apt/lists/*
 
-# and override this file with the command to start your server
 COPY assets /assets
-RUN chmod 755 /assets/*.sh && \
+
+RUN mkdir -p /home/steam/serverfiles && \
+chmod 755 /assets/*.sh && \
 chmod 755 /assets/*.cfg && \
 chmod 755 /assets/steamer.txt && \
 chown -R steam. /home/steam
