@@ -30,7 +30,7 @@ fi
 export MODS=$(echo "$MODS"  | sed 's|;|\\;|g')
 if [ ! -z ${MODS+x} ]
   then
-    MODSTRING="-mod=$MODS "
+    MODSTRING="-mod=$MODS"
 else
     MODSTRING=""
 fi
@@ -39,16 +39,9 @@ fi
 export SERVERMODS=$(echo "$SERVERMODS"  | sed 's|;|\\;|g')
 if [ ! -z ${SERVERMODS+x} ]
   then
-    SERVERMODSTRING="-mod=$SERVERMODS "
+    SERVERMODSTRING="-servermod=$SERVERMODS"
 else
     SERVERMODSTRING=""
 fi
 
-export CMDSTRING=" -netlog $ASPECT -ip=0.0.0.0 \
-  $PORTSTRING \
-  -cfg=/home/steam/serverfiles/cfg/arma3-server.network.cfg \
-  -config=/home/steam/serverfiles/cfg/arma3-server.server.cfg \
-  $MODSTRING \
-  $SERVERMODSTRING \
-  -bepath=/home/steam/serverfiles/battleye/ \
-  -autoInit -loadMissionToMemory"
+export CMDSTRING="-netlog $ASPECT -ip=0.0.0.0 $PORTSTRING -cfg=/home/steam/serverfiles/cfg/arma3-server.network.cfg -config=/home/steam/serverfiles/cfg/arma3-server.server.cfg $MODSTRING $SERVERMODSTRING -bepath=/home/steam/serverfiles/battleye"
