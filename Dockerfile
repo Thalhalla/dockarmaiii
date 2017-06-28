@@ -1,7 +1,7 @@
 FROM thalhalla/steamer
 MAINTAINER Josh Cox <josh 'at' webhosting coop>
 
-ENV DOCKARMAIII_UPDATED 2017062201
+ENV DOCKARMAIII_UPDATED 2017062801
 
 # override these variables in with the prompts
 ENV STEAM_GID=233780 \
@@ -27,6 +27,8 @@ RUN chmod 755 /assets/*.sh && \
 chmod 755 /assets/*.cfg && \
 chmod 755 /assets/steamer.txt && \
 chown -R steam. /home/steam
+
+USER steam
 
 # WORKDIR must be set to installation dir or controller won't work
 WORKDIR /home/steam/serverfiles
