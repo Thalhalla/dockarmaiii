@@ -1,6 +1,6 @@
 @ShutdownOnFailedCommand 1
 @NoPromptForPassword 1
 login REPLACEME_USERNAME REPLACEME_PASSWORD
-force_install_dir /home/steam/serverfiles
+force_install_dir /data
 app_update REPLACEME_GID validate
 quit

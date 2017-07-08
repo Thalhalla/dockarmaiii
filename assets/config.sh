@@ -1,7 +1,7 @@
 #!/bin/bash
 
-mkdir -p /home/steam/serverfiles/cfg
-cd /home/steam/serverfiles/cfg
+mkdir -p /config
+cd /config
 
 cp /assets/arma3-server.server.cfg ./
 cp /assets/arma3-server.network.cfg ./
@@ -46,4 +46,4 @@ else
     SERVERMODSTRING=""
 fi
 
-export CMDSTRING="-netlog $ASPECT -pid=/home/steam/serverfiles/arma3server.pid -ranking=/home/steam/serverfiles/ranking.log -ip=0.0.0.0 $PORTSTRING -cfg=/home/steam/serverfiles/cfg/arma3-server.network.cfg -config=/home/steam/serverfiles/cfg/arma3-server.server.cfg $MODSTRING $SERVERMODSTRING -bepath=/home/steam/serverfiles/battleye"
+export CMDSTRING="-netlog $ASPECT -pid=/config/arma3server.pid -ranking=/config/ranking.log -ip=0.0.0.0 $PORTSTRING -cfg=/config/arma3-server.network.cfg -config=/config/arma3-server.server.cfg $MODSTRING $SERVERMODSTRING -bepath=/data/battleye"

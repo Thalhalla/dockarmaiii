@@ -16,21 +16,18 @@ USER root
 # install requirements
 RUN apt-get update && apt-get install -y sudo less vim libtbb2:i386 && \
 # remove git and tmp dirs
-  apt-get remove -y git cmake linux-headers-amd64 build-essential libssl-dev libboost-dev libboost-thread-dev libboost-system-dev libsqlite3-dev libcurl4-openssl-dev libusb-dev zlib1g-dev libudev-dev && \
+     apt-get remove -y git cmake linux-headers-amd64 build-essential \
+     libssl-dev libboost-dev libboost-thread-dev libboost-system-dev \
+     libsqlite3-dev libcurl4-openssl-dev libusb-dev zlib1g-dev libudev-dev && \
      apt-get autoremove -y && \
      apt-get clean && \
      rm -rf /var/lib/apt/lists/*
 
 COPY assets /assets
 
-RUN chmod 755 /assets/*.sh && \
-chmod 755 /assets/*.cfg && \
-chmod 755 /assets/steamer.txt && \
-chown -R steam. /home/steam
-
 USER steam
 
 # WORKDIR must be set to installation dir or controller won't work
-WORKDIR /home/steam/serverfiles
+WORKDIR /data
 
-CMD ["/bin/bash",  "/assets/controller.sh"]
+CMD ["/assets/dockarmaiii"]

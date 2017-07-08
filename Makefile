@@ -11,9 +11,9 @@ build: builddocker armaiii
 
 start: rm TAG IP PORT HOMEDIR homedir armaiii STEAM_USERNAME STEAM_PASSWORD STEAM_GUARD_CODE homedir
 
-run: start rundocker
+run: reqs rm homedir datadir rundocker
 
-install: start installdocker
+install: reqs rm homedir datadir installdocker
 
 rundocker:
 	$(eval NAME := $(shell cat NAME))
@@ -39,6 +39,7 @@ rundocker:
 	--env IP=$(IP) \
 	--env PORT=$(PORT) \
 	-v $(HOMEDIR):/home/steam \
+	-v $(DATADIR):/data \
 	-t $(TAG)
 
 installdocker:
@@ -65,6 +66,7 @@ installdocker:
 	--env IP=$(IP) \
 	--env PORT=$(PORT) \
 	-v $(HOMEDIR):/home/steam \
+	-v $(DATADIR):/data \
 	-t $(TAG) /bin/bash
 
 builddocker: TAG
@@ -96,6 +98,11 @@ TAG:
 HOMEDIR:
 	@while [ -z "$$HOMEDIR" ]; do \
 		read -r -p "Enter the HOMEDIR you wish to associate with this container [HOMEDIR]: " HOMEDIR; echo "$$HOMEDIR">>HOMEDIR; cat HOMEDIR; \
+	done ;
+
+DATADIR:
+	@while [ -z "$$DATADIR" ]; do \
+		read -r -p "Enter the DATADIR you wish to associate with this container [DATADIR]: " DATADIR; echo "$$DATADIR">>DATADIR; cat DATADIR; \
 	done ;
 
 ASKIP:
@@ -144,6 +151,11 @@ homedir: HOMEDIR
 	-@sudo mkdir -p $(HOMEDIR)/.steam
 	-@sudo mkdir -p $(HOMEDIR)/.local
 	-@sudo chown -R 1000:1000 $(HOMEDIR)
+
+datadir: DATADIR
+	$(eval DATADIR := $(shell cat DATADIR))
+	-@sudo mkdir -p $(DATADIR)
+	-@sudo chown -R 1000:1000 $(DATADIR)
 
 armaiii:
 	echo 233780 > STEAM_GID
