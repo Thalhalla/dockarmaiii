@@ -9,7 +9,7 @@ main() {
       do_steamer_config
   fi
 
-  if [ ! -z ${FORCEUPDATE+x} ] || [ ! -f /home/steam/app_update_date ]
+  if [ ! -z ${FORCEUPDATE+x} ] || [ ! -f /data/dockarmaiii_update_date ]
     then
       do_app_update
   fi
@@ -38,7 +38,7 @@ do_app_update() {
   cd /opt/steamer
   ./steamcmd.sh +runscript /home/steam/steamer.txt
   cd /home/steam
-  date -I > /home/steam/app_update_date
+  date -I > /data/dockarmaiii_update_date
   sudo chown -R steam:steam /data
 }
 
