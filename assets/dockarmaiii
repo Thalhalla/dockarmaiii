@@ -14,6 +14,10 @@ main() {
       do_app_update
   fi
 
+  if [[ $WASTELAND_ENABLED = true ]]; then
+    do_wasteland_dl
+  fi
+
   # and startup
   startup
 }
@@ -42,6 +46,9 @@ do_app_update() {
   cd /opt/steamer
   ./steamcmd.sh +runscript /home/steam/steamer.txt
   cd /data
+  rm -Rf /data/mpmissions
+  mkdir -p /home/steam/mpmissions
+  ln -s /home/steam/mpmissions
   rm /data/dockarmaiii_start_data
   date -I > /data/dockarmaiii_update_date
   sudo chown -R steam:steam /data
@@ -63,6 +70,12 @@ do_steamer_config() {
   sudo chown -R steam:steam /home/steam
   rm /home/steam/dockarmaiii_start_config
   date -I > /home/steam/dockarmaiii_update_config
+}
+
+do_wasteland_dl() {
+  echo $WASTELAND_ENABLED
+  cd /home/steam/mpmissions
+  wget -c -q https://github.com/Thalhalla/ArmA3_Wasteland.Altis/raw/dev/release/ArmA3_Wasteland.Altis.pbo
 }
 
 main "$@"

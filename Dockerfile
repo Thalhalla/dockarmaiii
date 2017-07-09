@@ -1,7 +1,7 @@
 FROM thalhalla/steamer
 MAINTAINER Josh Cox <josh 'at' webhosting coop>
 
-ENV DOCKARMAIII_UPDATED 20170708
+ENV DOCKARMAIII_UPDATED 20170709
 
 # override these variables in with the prompts
 ENV STEAM_GID=233780 \
