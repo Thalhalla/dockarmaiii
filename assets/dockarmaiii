@@ -9,7 +9,7 @@ main() {
       do_steamer_config
   fi
 
-  if [ ! -z ${FORCEUPDATE+x} ] || [ ! -f /data/dockarmaiii_update_date ]
+  if [[ $FORCEUPDATE = true ]] || [ ! -f /data/dockarmaiii_update_date ]
     then
       do_app_update
   fi
