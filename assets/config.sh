@@ -1,6 +1,8 @@
 #!/bin/bash
 
 mkdir -p /home/steam/profiles
+mkdir -p "/home/steam/.local/share/Arma 3"
+mkdir -p "/home/steam/.local/share/Arma 3 - Other Profiles"
 cd /home/steam
 
 cp /assets/arma3-server.server.cfg ./
