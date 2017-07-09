@@ -13,7 +13,7 @@ sed -i  "s/^hostname.*/hostname = \"$HOSTNAME\";/" ./arma3-server.server.cfg
 sed -i  "s/^maxPlayers.*/maxPlayers = \"$MAX_PLAYERS\";/" ./arma3-server.server.cfg
 
 # set the server aspect (--server/--client)
-if [ ! -z ${HEADLESS_CLIENT+x} ]
+if [[ ${HEADLESS_CLIENT} ]]
   then
     ASPECT="-client"
 else
