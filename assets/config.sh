@@ -1,8 +1,10 @@
 #!/bin/bash
 
-mkdir -p /home/steam/profiles
+# if these aren't present the server will segfault/coredump
 mkdir -p "/home/steam/.local/share/Arma 3"
 mkdir -p "/home/steam/.local/share/Arma 3 - Other Profiles"
+
+mkdir -p /home/steam/profiles
 cd /home/steam
 
 cp /assets/arma3-server.server.cfg ./
