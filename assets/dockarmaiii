@@ -18,8 +18,13 @@ main() {
     do_wasteland_dl
   fi
 
-  # and startup
-  startup
+  #
+  if [[ $DRYRUN = true ]]; then
+    echo 'This is a dry county, Son!'
+  else
+    startup
+  fi
+
 }
 
 startup() {
