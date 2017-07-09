@@ -34,15 +34,25 @@ startup() {
 }
 
 do_app_update() {
+  echo 'data install'
+  sleep 3
+  date -I > /data/dockarmaiii_start_data
+  cat /data/dockarmaiii_start_data
   mkdir -p /data/arma3
   cd /opt/steamer
   ./steamcmd.sh +runscript /home/steam/steamer.txt
-  cd /home/steam
+  cd /data
+  rm /data/dockarmaiii_start_data
   date -I > /data/dockarmaiii_update_date
   sudo chown -R steam:steam /data
 }
 
 do_steamer_config() {
+  # allow nfs to settle
+  echo 'configuration'
+  sleep 3
+  date -I > /home/steam/dockarmaiii_start_config
+  cat /home/steam/dockarmaiii_start_config
 
   cp /assets/steamer.txt /home/steam/
   cd /home/steam
@@ -50,8 +60,9 @@ do_steamer_config() {
   sed -i "s/REPLACEME_USERNAME/$STEAM_USERNAME/" steamer.txt
   sed -i "s/REPLACEME_PASSWORD/$STEAM_PASSWORD/" steamer.txt
   sed -i "s/REPLACEME_GID/$STEAM_GID/" steamer.txt
-
   sudo chown -R steam:steam /home/steam
+  rm /home/steam/dockarmaiii_start_config
+  date -I > /home/steam/dockarmaiii_update_config
 }
 
 main "$@"
