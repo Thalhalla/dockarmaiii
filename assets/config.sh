@@ -20,17 +20,17 @@ else
     ASPECT="-server"
 fi
 
-# format the MODS string to escape ;
-export MODS=$(echo "$MODS"  | sed 's|;|\\;|g')
-if [ ! -z ${MODS+x} ]
+if [[ $MODS ]]
   then
+    # format the MODS string to escape ;
+    export MODS=$(echo "$MODS"  | sed 's|;|\\;|g')
     MODSTRING="-mod=$MODS"
 else
     MODSTRING=""
 fi
 
 # set the port
-if [ ! -z ${PORT+x} ]
+if [[ $PORT ]]
   then
     PORTSTRING="-port=$PORT"
 else
@@ -39,7 +39,7 @@ fi
 
 # format the SERVERMODS string to escape ;
 export SERVERMODS=$(echo "$SERVERMODS"  | sed 's|;|\\;|g')
-if [ ! -z ${SERVERMODS+x} ]
+if [[ $SERVERMODS ]]
   then
     SERVERMODSTRING="-servermod=$SERVERMODS"
 else
