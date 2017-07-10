@@ -22,17 +22,20 @@ initial_checks() {
       do_steamer_config
   fi
 
-  if [[ $FORCEUPDATE = true ]] || [ ! -f /data/dockarmaiii_update_date ]
-    then
-      do_app_update
-  fi
+  if [[ $BUILD_ENABLED = true ]]; then
+    if [[ $FORCEUPDATE = true ]] || [ ! -f /data/dockarmaiii_update_date ]
+      then
+        do_app_update
+    fi
 
-  if [[ $WASTELAND_ENABLED = true ]]; then
-    do_wasteland_dl
-  fi
+    if [[ $WASTELAND_ENABLED = true ]]; then
+      do_wasteland_dl
+    fi
 
-  if [[ $OVERWATCH_ENABLED = true ]]; then
-    do_overwatch_dl
+    if [[ $OVERWATCH_ENABLED = true ]]; then
+      do_ace_dl
+      do_overwatch_dl
+    fi
   fi
 }
 
@@ -120,12 +123,31 @@ do_overwatch_dl() {
       ${OVERTHROW_VERSION:=0.7.5.1}
       TMP=$(mktemp -d)
       cd $TMP
-      wget -c -q https://github.com/ArmaOverthrow/Overthrow/archive/$OVERTHROW_VERSION.zip
-      unzip Overthrow/archive/$OVERTHROW_VERSION.zip
-      cd Overthrow-$OVERTHROW_VERSION
-      cp -a addons/overthrow_main /data/addons/
-      cp logo_overthrow.paa /data/
+      wget -cq https://github.com/ArmaOverthrow/Overthrow/archive/$OVERTHROW_VERSION.zip
+      unzip $OVERTHROW_VERSION.zip
+      mkdir -p '/data/mods'
+      mv Overthrow-$OVERTHROW_VERSION  '/data/mods/@Overthrow'
+      cd
+      rm -Rf $TMP
       date -I > /data/.overwatch.dl
+  fi
+}
+
+do_ace_dl() {
+  if [ ! -f /data/.ace.dl ]
+    then
+      echo "ACE_DL"
+      ${ACE_VERSION:=3.10.1}
+      ACE_FILE=ace3_$ACE_VERSION.zip
+      TMP=$(mktemp -d)
+      cd $TMP
+      wget -cq https://github.com/acemod/ACE3/releases/download/v$ACE_VERSION/$ACE_FILE
+      unzip $ACE_FILE
+      mkdir -p '/data/mods'
+      mv '@ace' '/data/mods/@ace'
+      cd
+      rm -Rf $TMP
+      date -I > /data/.ace.dl
   fi
 }
 

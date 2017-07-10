@@ -1,10 +1,9 @@
 FROM thalhalla/steamer
 MAINTAINER Josh Cox <josh 'at' webhosting coop>
 
-ENV DOCKARMAIII_UPDATED 20170709
-
-# override these variables in with the prompts
-ENV STEAM_GID=233780 \
+ENV DOCKARMAIII_UPDATED=20170709 \
+  DOCKARMAIII_BUILD_ENABLED=true \
+  STEAM_GID=233780 \
   CLIENT_IP=10.42.227.21 \
   CLIENT_IP2=10.42.227.22 \
   CLIENT_IP3=10.42.227.23 \
