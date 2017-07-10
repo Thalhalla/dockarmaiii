@@ -3,6 +3,19 @@
 main() {
   # perform pre-install configuration
   # source /etc/myvars
+  initial_checks
+
+  if [[ $DRYRUN = true ]]; then
+    echo 'This is a dry county, Son!'
+  else
+    startup
+  fi
+}
+
+initial_checks() {
+  # check to see FS mounts are writable
+  fs_check /data/testfile
+  fs_check /home/steam/testfile
 
   if [ ! -f /home/steam/steamer.txt ]
     then
@@ -21,11 +34,22 @@ main() {
   if [[ $OVERWATCH_ENABLED = true ]]; then
     do_overwatch_dl
   fi
+}
 
-  if [[ $DRYRUN = true ]]; then
-    echo 'This is a dry county, Son!'
+fs_check() {
+  if [ ! -f $1 ]
+    then
+      FS_CHECK=0
+      echo "waiting on $1 to be writable"
+      while [ ! $FS_CHECK = 'success' ]
+      do
+        echo 'success' |tee $1 || true
+        FS_CHECK=$(cat $1 ) || FS_CHECK=0
+      done
+      echo "File system check was $FS_CHECK"
+      rm $1
   else
-    startup
+    echo "$1 exists already"
   fi
 }
 
