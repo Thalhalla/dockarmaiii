@@ -34,6 +34,7 @@ initial_checks() {
 
     if [[ $OVERWATCH_ENABLED = true ]]; then
       do_ace_dl
+      do_cba_dl
       do_overwatch_dl
     fi
   fi
@@ -68,7 +69,6 @@ startup() {
     echo restarting
     sleep 3
   done
-
 }
 
 do_app_update() {
@@ -130,6 +130,25 @@ do_overwatch_dl() {
       cd
       rm -Rf $TMP
       date -I > /data/.overwatch.dl
+  fi
+}
+
+do_cba_dl() {
+  if [ ! -f /data/.cba.dl ]
+    then
+      echo "CBA_DL"
+      ${CBA_VERSION:=3.4.0.170627}
+      CBA_FILE=CBA_A3-$CBA_VERSION
+      TMP=$(mktemp -d)
+      cd $TMP
+      wget -cq https://github.com/CBATeam/CBA_A3/archive/v$CBA_VERSION.zip
+      unzip $CBA_FILE.zip
+      rm $CBA_FILE.zip
+      mkdir -p '/data/mods'
+      mv CBA_A3-3.4.0.170627 '/data/mods/@CBA_A3'
+      cd
+      rm -Rf $TMP
+      date -I > /data/.cba.dl
   fi
 }
 
