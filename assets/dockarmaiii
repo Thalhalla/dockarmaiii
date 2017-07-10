@@ -18,13 +18,15 @@ main() {
     do_wasteland_dl
   fi
 
-  #
+  if [[ $OVERWATCH_ENABLED = true ]]; then
+    do_overwatch_dl
+  fi
+
   if [[ $DRYRUN = true ]]; then
     echo 'This is a dry county, Son!'
   else
     startup
   fi
-
 }
 
 startup() {
@@ -78,9 +80,29 @@ do_steamer_config() {
 }
 
 do_wasteland_dl() {
-  echo $WASTELAND_ENABLED
-  cd /home/steam/mpmissions
-  wget -c -q https://github.com/Thalhalla/ArmA3_Wasteland.Altis/raw/dev/release/ArmA3_Wasteland.Altis.pbo
+  if [ ! -f /data/.wasteland.dl ]
+    then
+      echo "WASTELAND_DL"
+      cd /home/steam/mpmissions
+      wget -c -q https://github.com/Thalhalla/ArmA3_Wasteland.Altis/raw/dev/release/ArmA3_Wasteland.Altis.pbo
+      date -I > /data/.wasteland.dl
+  fi
+}
+
+do_overwatch_dl() {
+  if [ ! -f /data/.overwatch.dl ]
+    then
+      echo "OVERWATCH_DL"
+      ${OVERTHROW_VERSION:=0.7.5.1}
+      TMP=$(mktemp -d)
+      cd $TMP
+      wget -c -q https://github.com/ArmaOverthrow/Overthrow/archive/$OVERTHROW_VERSION.zip
+      unzip Overthrow/archive/$OVERTHROW_VERSION.zip
+      cd Overthrow-$OVERTHROW_VERSION
+      cp -a addons/overthrow_main /data/addons/
+      cp logo_overthrow.paa /data/
+      date -I > /data/.overwatch.dl
+  fi
 }
 
 main "$@"
