@@ -43,12 +43,17 @@ initial_checks() {
 fs_check() {
   if [ ! -f $1 ]
     then
-      FS_CHECK=0
+      COUNTZERO=0
       echo "waiting on $1 to be writable"
+      echo 'success' |tee $1 || true
+      FS_CHECK=$(cat $1 ) || FS_CHECK=0
       while [ ! $FS_CHECK = 'success' ]
       do
+        sleep 3
         echo 'success' |tee $1 || true
         FS_CHECK=$(cat $1 ) || FS_CHECK=0
+        echo "count $COUNTZERO"
+        (( COUNTZERO++ ))
       done
       echo "File system check was $FS_CHECK"
       rm $1
