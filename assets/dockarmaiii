@@ -177,8 +177,7 @@ do_wasteland_dl() {
 do_overwatch_dl() {
   if [ ! -f /data/.overwatch.dl ]
     then
-      echo "OVERWATCH_DL"
-      ${OVERTHROW_VERSION:=0.7.5.1}
+      echo "OVERWATCH_DL ${OVERTHROW_VERSION:=0.7.5.1}"
       TMP=$(mktemp -d)
       cd $TMP
       wget -cq https://github.com/ArmaOverthrow/Overthrow/archive/$OVERTHROW_VERSION.zip
@@ -194,8 +193,7 @@ do_overwatch_dl() {
 do_cba_dl() {
   if [ ! -f /data/.cba.dl ]
     then
-      echo "CBA_DL"
-      ${CBA_VERSION:=3.4.0.170627}
+      echo "CBA_DL ${CBA_VERSION:=3.4.0.170627}"
       CBA_FILE=CBA_A3-$CBA_VERSION
       TMP=$(mktemp -d)
       cd $TMP
@@ -213,8 +211,7 @@ do_cba_dl() {
 do_ace_dl() {
   if [ ! -f /data/.ace.dl ]
     then
-      echo "ACE_DL"
-      ${ACE_VERSION:=3.10.1}
+      echo "ACE_DL ${ACE_VERSION:=3.10.1}"
       ACE_FILE=ace3_$ACE_VERSION.zip
       TMP=$(mktemp -d)
       cd $TMP
