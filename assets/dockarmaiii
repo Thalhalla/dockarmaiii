@@ -57,7 +57,7 @@ fs_check() {
         echo "count $COUNTZERO"
         (( COUNTZERO++ ))
       done
-      echo "File system check was $FS_CHECK"
+      echo "File system check of $1 was $FS_CHECK"
       rm $1
   else
     echo "$1 exists already"
