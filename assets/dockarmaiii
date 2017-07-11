@@ -64,51 +64,54 @@ fs_check() {
   fi
 }
 
-startup() {
+export_startup_vars() {
   # perform post-install configuration
 
   # set the server aspect (--server/--client)
   if [[ ${HEADLESS_CLIENT} ]]
     then
-      ASPECT="-client"
+      export ASPECT="-client"
   else
-      ASPECT="-server"
+      export ASPECT="-server"
   fi
 
   if [[ $MODS ]]
     then
       # format the MODS string to escape ;
       export MODS=$(echo "$MODS"  | sed 's|;|\\;|g')
-      MODSTRING="-mod=$MODS"
+      export MODSTRING="-mod=$MODS"
   else
-      MODSTRING=""
+      export MODSTRING=""
   fi
 
   # set the port
   if [[ $PORT ]]
     then
-      PORTSTRING="-port=$PORT"
+      export PORTSTRING="-port=$PORT"
   else
-      PORTSTRING="-port=2302"
+      export PORTSTRING="-port=2302"
   fi
 
   # format the SERVERMODS string to escape ;
-  export SERVERMODS=$(echo "$SERVERMODS"  | sed 's|;|\\;|g')
   if [[ $SERVERMODS ]]
     then
-      SERVERMODSTRING="-servermod=$SERVERMODS"
+      export SERVERMODS=$(echo "$SERVERMODS"  | sed 's|;|\\;|g')
+      export SERVERMODSTRING="-servermod=$SERVERMODS"
   else
-      SERVERMODSTRING=""
+      export SERVERMODSTRING=""
   fi
 
   export CMDSTRING="-netlog $ASPECT -pid=/home/steam/arma3server.pid -ranking=/home/steam/ranking.log -ip=0.0.0.0 $PORTSTRING -profiles=/home/steam/profiles -cfg=/home/steam/arma3-server.network.cfg -config=/home/steam/arma3-server.server.cfg -bepath=/data/battleye $MODSTRING $SERVERMODSTRING"
+}
+
+startup() {
+  export_startup_vars
 
   cd /data
   while [ 1 ]
   do
     echo "./arma3server $CMDSTRING"
     eval ./arma3server $CMDSTRING
-    #sleep 1800
     echo restarting
     sleep 3
   done
