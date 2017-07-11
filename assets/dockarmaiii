@@ -13,6 +13,8 @@ main() {
 }
 
 initial_checks() {
+  sudo chown steam. /data
+  sudo chown steam. /home/steam
   # check to see FS mounts are writable
   fs_check /data/testfile
   fs_check /home/steam/testfile
@@ -90,7 +92,7 @@ do_app_update() {
   ln -s /home/steam/mpmissions
   rm /data/dockarmaiii_start_data
   date -I > /data/dockarmaiii_update_date
-  sudo chown -R steam:steam /data
+  sudo chown -R steam. /data
 }
 
 do_steamer_config() {
@@ -106,7 +108,7 @@ do_steamer_config() {
   sed -i "s/REPLACEME_USERNAME/$STEAM_USERNAME/" steamer.txt
   sed -i "s/REPLACEME_PASSWORD/$STEAM_PASSWORD/" steamer.txt
   sed -i "s/REPLACEME_GID/$STEAM_GID/" steamer.txt
-  sudo chown -R steam:steam /home/steam
+  sudo chown -R steam. /home/steam
   rm /home/steam/dockarmaiii_start_config
   date -I > /home/steam/dockarmaiii_update_config
 }
