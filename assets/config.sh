@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo 'WARNING: Deprecated dockarmaii integrates all of this now'
+sleep 15
+
 # if these aren't present the server will segfault/coredump
 mkdir -p "/home/steam/.local/share/Arma 3"
 mkdir -p "/home/steam/.local/share/Arma 3 - Other Profiles"
