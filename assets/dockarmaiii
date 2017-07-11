@@ -12,12 +12,6 @@ main() {
 }
 
 initial_checks() {
-  sudo chown steam. /data
-  sudo chown steam. /home/steam
-  # check to see FS mounts are writable
-  fs_check /data/testfile
-  fs_check /home/steam/testfile
-
   if [ ! -f /home/steam/steamer.txt ]
     then
       do_steamer_config
@@ -118,7 +112,9 @@ startup() {
 
 do_app_update() {
   echo 'data install'
-  sleep 3
+  # check to see FS mounts are writable
+  sudo chown steam. /data
+  fs_check /data/testfile
   date -I > /data/dockarmaiii_start_data
   cat /data/dockarmaiii_start_data
   mkdir -p /data/arma3
@@ -135,6 +131,8 @@ do_app_update() {
 
 do_steamer_config() {
   echo 'configuration'
+  sudo chown steam. /home/steam
+  fs_check /home/steam/testfile
   date -I > /home/steam/dockarmaiii_start_config
   cat /home/steam/dockarmaiii_start_config
 
