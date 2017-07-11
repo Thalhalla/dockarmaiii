@@ -2,7 +2,6 @@
 
 main() {
   # perform pre-install configuration
-  # source /etc/myvars
   initial_checks
 
   if [[ $DRYRUN = true ]]; then
