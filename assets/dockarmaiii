@@ -1,6 +1,6 @@
 #!/bin/bash
-DATA_DIR=/data
-CONFIG_DIR=/home/steam
+DATA_DIR=/data/arma3
+CONFIG_DIR=/home/steam/arma3
 
 main() {
   # perform pre-install configuration
@@ -138,19 +138,13 @@ do_steamer_config() {
   date -I > $CONFIG_DIR/dockarmaiii_start_config
   cat $CONFIG_DIR/dockarmaiii_start_config
 
-  cp /assets/steamer.txt $CONFIG_DIR/
   cd $CONFIG_DIR
-  #ln -s '$CONFIG_DIR/Steam/steamapps/common/Arma 3 Server' arma3
-  sed -i "s/REPLACEME_USERNAME/$STEAM_USERNAME/" steamer.txt
-  sed -i "s/REPLACEME_PASSWORD/$STEAM_PASSWORD/" steamer.txt
-  sed -i "s/REPLACEME_GID/$STEAM_GID/" steamer.txt
+  envsubst < /assets/steamer.txt > $CONFIG_DIR/steamer.txt
 
   # if these aren't present the server will segfault/coredump
   mkdir -p "$CONFIG_DIR/.local/share/Arma 3"
   mkdir -p "$CONFIG_DIR/.local/share/Arma 3 - Other Profiles"
-
   mkdir -p $CONFIG_DIR/profiles
-  cd $CONFIG_DIR
 
   cp /assets/arma3-server.server.cfg ./
   cp /assets/arma3-server.network.cfg ./

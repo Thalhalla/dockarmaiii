@@ -1,6 +1,6 @@
 @ShutdownOnFailedCommand 1
 @NoPromptForPassword 1
-login REPLACEME_USERNAME REPLACEME_PASSWORD
-force_install_dir /data
-app_update REPLACEME_GID validate
+login $STEAM_USERNAME $STEAM_PASSWORD
+force_install_dir $DATA_DIR
+app_update $STEAM_GID validate
 quit
