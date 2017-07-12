@@ -141,7 +141,7 @@ do_steamer_config() {
   cat $CONFIG_DIR/dockarmaiii_start_config
 
   cd $CONFIG_DIR
-  envsubst < /assets/steamer.txt > $CONFIG_DIR/steamer.txt
+  DATA_DIR=$DATA_DIR envsubst < /assets/steamer.txt > $CONFIG_DIR/steamer.txt
 
   # if these aren't present the server will segfault/coredump
   mkdir -p "$CONFIG_DIR/.local/share/Arma 3"
