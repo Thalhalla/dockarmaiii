@@ -115,6 +115,7 @@ startup() {
 do_app_update() {
   echo 'data install'
   # check to see FS mounts are writable
+  sudo mkdir -p $DATA_DIR
   sudo chown steam. $DATA_DIR
   fs_check $DATA_DIR/testfile
   date -I > $DATA_DIR/dockarmaiii_start_data
@@ -133,6 +134,7 @@ do_app_update() {
 
 do_steamer_config() {
   echo 'configuration'
+  sudo mkdir -p $CONFIG_DIR
   sudo chown steam. $CONFIG_DIR
   fs_check $CONFIG_DIR/testfile
   date -I > $CONFIG_DIR/dockarmaiii_start_config
