@@ -157,6 +157,11 @@ do_steamer_config() {
   sed -i  "s/^hostname.*/hostname = \"$HOSTNAME\";/" ./arma3-server.server.cfg
   sed -i  "s/^maxPlayers.*/maxPlayers = \"$MAX_PLAYERS\";/" ./arma3-server.server.cfg
 
+  if [[ $GAME_PASSWORD ]]
+    then
+      sed -i  "s/^password\ =.*/password = \"$GAME_PASSWORD\";/" ./arma3-server.server.cfg
+  fi
+    
   sudo chown -R steam. $CONFIG_DIR
   rm $CONFIG_DIR/dockarmaiii_start_config
   date -I > $CONFIG_DIR/dockarmaiii_update_config
