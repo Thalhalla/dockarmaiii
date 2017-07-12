@@ -159,9 +159,9 @@ do_steamer_config() {
 
   if [[ $GAME_PASSWORD ]]
     then
-      sed -i  "s/^password\ =.*/password = \"$GAME_PASSWORD\";/" ./arma3-server.server.cfg
+      echo "password = \"$GAME_PASSWORD\";" >> ./arma3-server.server.cfg
   fi
-    
+
   sudo chown -R steam. $CONFIG_DIR
   rm $CONFIG_DIR/dockarmaiii_start_config
   date -I > $CONFIG_DIR/dockarmaiii_update_config
