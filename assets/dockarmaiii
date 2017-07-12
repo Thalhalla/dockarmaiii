@@ -1,4 +1,6 @@
 #!/bin/bash
+DATA_DIR=/data
+CONFIG_DIR=/home/steam
 
 main() {
   # perform pre-install configuration
@@ -12,13 +14,13 @@ main() {
 }
 
 initial_checks() {
-  if [ ! -f /home/steam/steamer.txt ]
+  if [ ! -f $CONFIG_DIR/steamer.txt ]
     then
       do_steamer_config
   fi
 
   if [[ $BUILD_ENABLED = true ]]; then
-    if [[ $FORCEUPDATE = true ]] || [ ! -f /data/dockarmaiii_update_date ]
+    if [[ $FORCEUPDATE = true ]] || [ ! -f $DATA_DIR/dockarmaiii_update_date ]
       then
         do_app_update
     fi
@@ -94,13 +96,13 @@ export_startup_vars() {
       export SERVERMODSTRING=""
   fi
 
-  export CMDSTRING="-netlog $ASPECT -pid=/home/steam/arma3server.pid -ranking=/home/steam/ranking.log -ip=0.0.0.0 $PORTSTRING -profiles=/home/steam/profiles -cfg=/home/steam/arma3-server.network.cfg -config=/home/steam/arma3-server.server.cfg -bepath=/data/battleye $MODSTRING $SERVERMODSTRING"
+  export CMDSTRING="-netlog $ASPECT -pid=$CONFIG_DIR/arma3server.pid -ranking=$CONFIG_DIR/ranking.log -ip=0.0.0.0 $PORTSTRING -profiles=$CONFIG_DIR/profiles -cfg=$CONFIG_DIR/arma3-server.network.cfg -config=$CONFIG_DIR/arma3-server.server.cfg -bepath=$DATA_DIR/battleye $MODSTRING $SERVERMODSTRING"
 }
 
 startup() {
   export_startup_vars
 
-  cd /data
+  cd $DATA_DIR
   while [ 1 ]
   do
     echo "./arma3server $CMDSTRING"
@@ -113,42 +115,42 @@ startup() {
 do_app_update() {
   echo 'data install'
   # check to see FS mounts are writable
-  sudo chown steam. /data
-  fs_check /data/testfile
-  date -I > /data/dockarmaiii_start_data
-  cat /data/dockarmaiii_start_data
-  mkdir -p /data/arma3
+  sudo chown steam. $DATA_DIR
+  fs_check $DATA_DIR/testfile
+  date -I > $DATA_DIR/dockarmaiii_start_data
+  cat $DATA_DIR/dockarmaiii_start_data
+  mkdir -p $DATA_DIR/arma3
   cd /opt/steamer
-  ./steamcmd.sh +runscript /home/steam/steamer.txt
-  cd /data
-  rm -Rf /data/mpmissions
-  mkdir -p /home/steam/mpmissions
-  ln -s /home/steam/mpmissions
-  rm /data/dockarmaiii_start_data
-  date -I > /data/dockarmaiii_update_date
-  sudo chown -R steam. /data
+  ./steamcmd.sh +runscript $CONFIG_DIR/steamer.txt
+  cd $DATA_DIR
+  rm -Rf $DATA_DIR/mpmissions
+  mkdir -p $CONFIG_DIR/mpmissions
+  ln -s $CONFIG_DIR/mpmissions
+  rm $DATA_DIR/dockarmaiii_start_data
+  date -I > $DATA_DIR/dockarmaiii_update_date
+  sudo chown -R steam. $DATA_DIR
 }
 
 do_steamer_config() {
   echo 'configuration'
-  sudo chown steam. /home/steam
-  fs_check /home/steam/testfile
-  date -I > /home/steam/dockarmaiii_start_config
-  cat /home/steam/dockarmaiii_start_config
+  sudo chown steam. $CONFIG_DIR
+  fs_check $CONFIG_DIR/testfile
+  date -I > $CONFIG_DIR/dockarmaiii_start_config
+  cat $CONFIG_DIR/dockarmaiii_start_config
 
-  cp /assets/steamer.txt /home/steam/
-  cd /home/steam
-  #ln -s '/home/steam/Steam/steamapps/common/Arma 3 Server' arma3
+  cp /assets/steamer.txt $CONFIG_DIR/
+  cd $CONFIG_DIR
+  #ln -s '$CONFIG_DIR/Steam/steamapps/common/Arma 3 Server' arma3
   sed -i "s/REPLACEME_USERNAME/$STEAM_USERNAME/" steamer.txt
   sed -i "s/REPLACEME_PASSWORD/$STEAM_PASSWORD/" steamer.txt
   sed -i "s/REPLACEME_GID/$STEAM_GID/" steamer.txt
 
   # if these aren't present the server will segfault/coredump
-  mkdir -p "/home/steam/.local/share/Arma 3"
-  mkdir -p "/home/steam/.local/share/Arma 3 - Other Profiles"
+  mkdir -p "$CONFIG_DIR/.local/share/Arma 3"
+  mkdir -p "$CONFIG_DIR/.local/share/Arma 3 - Other Profiles"
 
-  mkdir -p /home/steam/profiles
-  cd /home/steam
+  mkdir -p $CONFIG_DIR/profiles
+  cd $CONFIG_DIR
 
   cp /assets/arma3-server.server.cfg ./
   cp /assets/arma3-server.network.cfg ./
@@ -159,39 +161,39 @@ do_steamer_config() {
   sed -i  "s/^hostname.*/hostname = \"$HOSTNAME\";/" ./arma3-server.server.cfg
   sed -i  "s/^maxPlayers.*/maxPlayers = \"$MAX_PLAYERS\";/" ./arma3-server.server.cfg
 
-  sudo chown -R steam. /home/steam
-  rm /home/steam/dockarmaiii_start_config
-  date -I > /home/steam/dockarmaiii_update_config
+  sudo chown -R steam. $CONFIG_DIR
+  rm $CONFIG_DIR/dockarmaiii_start_config
+  date -I > $CONFIG_DIR/dockarmaiii_update_config
 }
 
 do_wasteland_dl() {
-  if [ ! -f /data/.wasteland.dl ]
+  if [ ! -f $DATA_DIR/.wasteland.dl ]
     then
       echo "WASTELAND_DL"
-      cd /home/steam/mpmissions
+      cd $CONFIG_DIR/mpmissions
       wget -c -q https://github.com/Thalhalla/ArmA3_Wasteland.Altis/raw/dev/release/ArmA3_Wasteland.Altis.pbo
-      date -I > /data/.wasteland.dl
+      date -I > $DATA_DIR/.wasteland.dl
   fi
 }
 
 do_overwatch_dl() {
-  if [ ! -f /data/.overwatch.dl ]
+  if [ ! -f $DATA_DIR/.overwatch.dl ]
     then
       echo "OVERWATCH_DL ${OVERTHROW_VERSION:=0.7.5.1}"
       TMP=$(mktemp -d)
       cd $TMP
       wget -cq https://github.com/ArmaOverthrow/Overthrow/archive/$OVERTHROW_VERSION.zip
       unzip $OVERTHROW_VERSION.zip
-      mkdir -p '/data/mods'
-      mv Overthrow-$OVERTHROW_VERSION  '/data/mods/@Overthrow'
+      mkdir -p "$DATA_DIR/mods"
+      mv Overthrow-$OVERTHROW_VERSION  "$DATA_DIR/mods/@Overthrow"
       cd
       rm -Rf $TMP
-      date -I > /data/.overwatch.dl
+      date -I > $DATA_DIR/.overwatch.dl
   fi
 }
 
 do_cba_dl() {
-  if [ ! -f /data/.cba.dl ]
+  if [ ! -f $DATA_DIR/.cba.dl ]
     then
       echo "CBA_DL ${CBA_VERSION:=3.4.0.170627}"
       CBA_FILE=CBA_A3-$CBA_VERSION
@@ -200,16 +202,16 @@ do_cba_dl() {
       wget -cq https://github.com/CBATeam/CBA_A3/archive/v$CBA_VERSION.zip
       unzip $CBA_FILE.zip
       rm $CBA_FILE.zip
-      mkdir -p '/data/mods'
-      mv CBA_A3-3.4.0.170627 '/data/mods/@CBA_A3'
+      mkdir -p "$DATA_DIR/mods"
+      mv CBA_A3-3.4.0.170627 "$DATA_DIR/mods/@CBA_A3"
       cd
       rm -Rf $TMP
-      date -I > /data/.cba.dl
+      date -I > $DATA_DIR/.cba.dl
   fi
 }
 
 do_ace_dl() {
-  if [ ! -f /data/.ace.dl ]
+  if [ ! -f $DATA_DIR/.ace.dl ]
     then
       echo "ACE_DL ${ACE_VERSION:=3.10.1}"
       ACE_FILE=ace3_$ACE_VERSION.zip
@@ -217,11 +219,11 @@ do_ace_dl() {
       cd $TMP
       wget -cq https://github.com/acemod/ACE3/releases/download/v$ACE_VERSION/$ACE_FILE
       unzip $ACE_FILE
-      mkdir -p '/data/mods'
-      mv '@ace' '/data/mods/@ace'
+      mkdir -p "$DATA_DIR/mods"
+      mv '@ace' "$DATA_DIR/mods/@ace"
       cd
       rm -Rf $TMP
-      date -I > /data/.ace.dl
+      date -I > $DATA_DIR/.ace.dl
   fi
 }
 
