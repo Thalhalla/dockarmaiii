@@ -1,6 +1,6 @@
 #!/bin/bash
-DATA_DIR=/data
-CONFIG_DIR=/home/steam
+export DATA_DIR=/data/arma3
+export CONFIG_DIR=/home/steam/arma3
 
 main() {
   # perform pre-install configuration
@@ -115,6 +115,7 @@ startup() {
 do_app_update() {
   echo 'data install'
   # check to see FS mounts are writable
+  sudo mkdir -p $DATA_DIR
   sudo chown steam. $DATA_DIR
   fs_check $DATA_DIR/testfile
   date -I > $DATA_DIR/dockarmaiii_start_data
@@ -133,24 +134,19 @@ do_app_update() {
 
 do_steamer_config() {
   echo 'configuration'
+  sudo mkdir -p $CONFIG_DIR
   sudo chown steam. $CONFIG_DIR
   fs_check $CONFIG_DIR/testfile
   date -I > $CONFIG_DIR/dockarmaiii_start_config
   cat $CONFIG_DIR/dockarmaiii_start_config
 
-  cp /assets/steamer.txt $CONFIG_DIR/
   cd $CONFIG_DIR
-  #ln -s '$CONFIG_DIR/Steam/steamapps/common/Arma 3 Server' arma3
-  sed -i "s/REPLACEME_USERNAME/$STEAM_USERNAME/" steamer.txt
-  sed -i "s/REPLACEME_PASSWORD/$STEAM_PASSWORD/" steamer.txt
-  sed -i "s/REPLACEME_GID/$STEAM_GID/" steamer.txt
+  DATA_DIR=$DATA_DIR envsubst < /assets/steamer.txt > $CONFIG_DIR/steamer.txt
 
   # if these aren't present the server will segfault/coredump
   mkdir -p "$CONFIG_DIR/.local/share/Arma 3"
   mkdir -p "$CONFIG_DIR/.local/share/Arma 3 - Other Profiles"
-
   mkdir -p $CONFIG_DIR/profiles
-  cd $CONFIG_DIR
 
   cp /assets/arma3-server.server.cfg ./
   cp /assets/arma3-server.network.cfg ./
@@ -160,6 +156,11 @@ do_steamer_config() {
   sed -i  "s/^passwordAdmin.*/passwordAdmin = \"$ADMIN_PASSWORD\";/" ./arma3-server.server.cfg
   sed -i  "s/^hostname.*/hostname = \"$HOSTNAME\";/" ./arma3-server.server.cfg
   sed -i  "s/^maxPlayers.*/maxPlayers = \"$MAX_PLAYERS\";/" ./arma3-server.server.cfg
+
+  if [[ $GAME_PASSWORD ]]
+    then
+      echo "password = \"$GAME_PASSWORD\";" >> ./arma3-server.server.cfg
+  fi
 
   sudo chown -R steam. $CONFIG_DIR
   rm $CONFIG_DIR/dockarmaiii_start_config
